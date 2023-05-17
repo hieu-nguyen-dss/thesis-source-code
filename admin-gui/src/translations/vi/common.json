@@ -1,0 +1,164 @@
+{
+  "auth": {
+    "login": {
+      "password": "Mật khẩu"
+    },
+    "logout": "Đăng xuất"
+  },
+  "pages": {
+    "settings": {
+      "menu": "Cài đặt",
+      "language": "Ngôn ngữ"
+    },
+    "profile": {
+      "menu": "Thông tin"
+    },
+    "home": {
+      "menu": "Trang chủ",
+      "getStarted": "Bắt đầu",
+      "description": "Hỗ trợ quá trình học tập cho học sinh\nTạo và chia sẻ lộ trình học tập đến mọi người",
+      "myLps": {
+        "name": "Lộ trình",
+        "description": "Quản lý lộ trình học tập"
+      },
+      "discovery": {
+        "name": "Khám phá",
+        "description": "Tìm kiếm các lộ trình học tập phù hợp với nhu cầu   "
+      },
+      "organization": {
+        "name": "Tổ chức",
+        "description": "Tạo tổ chức của bạn\n Xây dựng khóa học\n Tìm kiếm giáo viên cho khóa học"
+      }
+    },
+    "myLps": {
+      "menu": "Lộ trình học tập"
+    },
+    "discovery": {
+      "menu": "Khám phá"
+    },
+    "organization": {
+      "menu": "Tổ chức"
+    }
+  },
+  "categories": {
+    "geography": "Địa lý",
+    "literature": "Văn học",
+    "chemistry": "Hóa học",
+    "history": "Lịch sử",
+    "math": "Đại số",
+    "it": "Tin học",
+    "geometry": "HÌnh học",
+    "physicalEducation": "Thể chất",
+    "physics": "Vật lý",
+    "foreignLanguage": "Ngoại ngữ",
+    "biology": "Sinh học"
+  },
+  "search": "Tìm kiếm",
+  "learningPath": {
+    "view": "Xem chi tiết",
+    "information": "Thông tin chung",
+    "category": "Danh mục",
+    "completed": "Mức độ hoàn thành",
+    "description": "Mô tả",
+    "outcomes": "Mục tiêu",
+    "rubrics": "Ma trận ra đề thi",
+    "tableOfContent": "Mục lục",
+    "lessons": "Bài học",
+    "newPart": "Thêm chương mới",
+    "newGroupActivity": "Thêm nhóm hoạt động",
+    "name": "Tên nhóm hoạt động",
+    "share": "Chia sẻ",
+    "clone": "Tạo bản sao",
+    "setting": "Cài đặt",
+    "public": "Công khai",
+    "publicDes": "Mọi người có đều có thể xem lộ trình học tập này nếu có link",
+    "allowClone": "Cho phép tạo bản sao",
+    "allowCloneDes": "Cho phép mọi người có thể tạo bản sao từ lộ trình học tập này",
+    "newLp": {
+      "dialogTitle": "Tạo lộ trình học tập mới",
+      "namePlaceholder": "Tên lộ trình",
+      "category": "Danh mục",
+      "description":"Mô tả",
+      "ok": "Tạo",
+      "cancel": "Hủy",
+      "lpType": "Loại lộ trình",
+      "roadmap": "Học sinh",
+      "Course": "Khóa học / môn học",
+      "forOgz": "Khóa học"
+    }
+  },
+  "lesson": {
+    "outcomes": "Mục tiêu",
+    "knowledge": "Kiến thức",
+    "skill": "Kỹ năng",
+    "attitude": "Thái độ",
+    "content": "Nội dung",
+    "preparation": "Chuẩn bị",
+    "preparationPlaceholder": "Bạn phải chuẩn bị những gì cho bài học",
+    "resources": "Tài liệu",
+    "chooseFile": "Chọn file",
+    "upload": "Tải lên",
+    "activities": "Hoạt động chính",
+    "newActivity": "Thêm hoạt động mới",
+    "cannotUndo": "Bạn sẽ không thể khôi phục hành động xóa",
+    "delete": "Xóa",
+    "cancel": "Hủy",
+    "newActionName": "Tên hoạt động mới"
+  },
+  "learningAction": {
+    "readWatchListen": "Đọc-Nghe giảng",
+    "collaborate": "Làm việc nhóm",
+    "discuss": "Thảo luận",
+    "investigate": "Nghiên cứu",
+    "practice": "Thực hành",
+    "produce": "Làm sản phẩm",
+    "onlineOrOffline": "Online hoặc offline",
+    "resources": "Tài nguyên",
+    "save": "Lưu",
+    "cannotUndo": "Bạn sẽ không thể khôi phục hành động xóa",
+    "delete": "Xóa",
+    "cancel": "Hủy"
+  },
+  "lessonUpdate": {
+    "name": "Nhật ký cập nhật bài học",
+    "addLA": " thêm hoạt động ",
+    "delLA": " xóa hoạt động ",
+    "addGA": " thêm nhóm hoạt động ",
+    "delGA": " xóa nhóm hoạt động ",
+    "rename": " đổi tên ",
+    "to": " từ ",
+    "from": " thành ",
+    "markCompleted": " đánh dấu đã hoàn thành ",
+    "markIncompleted": " bỏ đánh dấu đã hoàn thành "
+  },
+  "button": {
+    "saveChange": "Lưu thay đổi",
+    "cancel": "Hủy"
+  },
+  "outcomes": {
+    "createNew": "Tạo mục tiêu mới",
+    "placeholderValue": "Mô tả cho mục tiêu",
+    "placeholderId": "Tên mục tiêu",
+    "addBefore": "Thêm một mục tiêu bên trên",
+    "addAfter": "Thêm một mục tiêu bên dưới",
+    "delOutcome": "Xóa mục tiêu",
+    "addSub": "Thêm mục tiêu nhỏ"
+  },
+  "rubrics": {
+    "newRubric": "Tạo mới",
+    "title": "Chọn một ma trận ra đề",
+    "namePlaceholder": "Tên ma trận",
+    "ok": "Tạo",
+    "cancel":"Hủy",
+    "questionByTopic": "Câu hỏi / chủ đề",
+    "pointByTopic": "Điểm / chủ đề",
+    "columnNamePlaceholder": "Tên cột",
+    "deleteColumn": "Xóa cột",
+    "markTopicColumn": "Cột chủ đề",
+    "addSubColumn": "Tách cột",
+    "markSummary": "Cột tổng kết",
+    "newTopic": "Thêm chủ đề",
+    "delTopic": "Xóa chủ đề",
+    "save": "Lưu"
+  }
+}

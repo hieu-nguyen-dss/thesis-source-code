@@ -1,0 +1,32 @@
+.sidebar-container {
+  position: fixed;
+  top: 90px;
+  left: 0;
+  height: calc(100vh - 90px);
+  width: 250px;
+  background-color: white;
+  border-right: 1px solid black;
+  z-index: 100;
+}
+
+.sidebar-container .ant-menu {
+  background-color: transparent;
+  font-size: 20px;
+}
+
+.sidebar-container .ant-menu .ant-menu-item {
+  height: 50px;
+}
+.sidebar-container .ant-menu .ant-menu-item {
+  margin: 0;
+  height: 60px;
+}
+
+.sidebar-container .ant-menu-item-selected {
+  background-color: #B5E8C0 !important;
+
+}
+
+.sidebar-container .ant-menu-title-content {
+  font-size: 20px;
+}

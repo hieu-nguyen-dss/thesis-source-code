@@ -1,0 +1,109 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    environment:
+      - MONGO_INIT_ROOT_USERNAME=root
+      - MONGO_INIT_ROOT_PASSWORD=admin
+    ports:
+      - 27017:27017
+    volumes:
+      # seeding scripts
+      - ./mongo-entrypoint:/docker-entrypoint-initdb.d
+      # named volumes
+      - mongodb:/data/db
+    networks:
+      - mern
+  redis:
+    image: redis:6.2-alpine
+    container_name: redis-server
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
+    networks:
+      - mern
+
+  notif-service:
+    image: mrkienkptn/notif-service:v1
+    build:
+      context: ./notif-service
+    container_name: notif-service
+    restart: always
+    ports:
+      - 4000:4000
+    networks:
+      - mern
+
+  lp-service:
+    image: mrkienkptn/lp-service:v1
+    build:
+      context: ./lp-service
+    container_name: lp-service
+    ports:
+      - 8000:8000
+    restart: always
+    volumes:
+      - lp-service:/app
+    environment:
+      - NODE_ENV=development
+      - PORT=8000
+      - MONGO_URI=mongodb://mongo:27017/learning-path
+      - SOCKET_HOST=notif-service
+      - SOCKET_PORT=4000
+      - CLIENT_HOST=client-gui
+      - CLIENT_PORT=3000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    networks:
+      - mern
+    depends_on:
+      - mongo
+      - notif-service
+      - redis
+
+  client-gui:
+    image: mrkienkptn/client-gui:v1
+    build:
+      context: ./client-gui
+    container_name: client-gui
+    ports:
+      - 3000:80
+    restart: unless-stopped
+    environment:
+      - REACT_APP_API_SERVER=http://lp-service:8000
+      - REACT_APP_SOCKET_SERVER=http://notif-service:4000
+      - NODE_ENV=production
+    networks:
+      - mern
+    depends_on:
+      - lp-service
+      - notif-service
+
+  admin-gui:
+    image: mrkienkptn/admin-gui:v1
+    build:
+      context: ./admin-gui
+    container_name: admin-gui
+    ports:
+      - 3001:80
+    restart: unless-stopped
+    environment:
+      - REACT_APP_API_SERVER=http://lp-service:8000
+      - NODE_ENV=production
+    networks:
+      - mern
+    depends_on:
+      - lp-service
+
+volumes:
+  mongodb:
+  lp-service:    
+  redis:
+
+networks:
+  mern:
+    driver: bridge

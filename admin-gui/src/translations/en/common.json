@@ -1,0 +1,164 @@
+{
+  "auth": {
+    "login": {
+      "password": "Password"
+    },
+    "logout": "Logout"
+  },
+  "pages": {
+    "settings": {
+      "menu": "Setting",
+      "language": "Language"
+    },
+    "profile": {
+      "menu": "Profile"
+    },
+    "home": {
+      "menu": "Home",
+      "getStarted": "Get Started",
+      "description": "Support student's learning\nCreating and sharing your Learning Path",
+      "myLps": {
+        "name": "My Learning Paths",
+        "description": "Manage your learning paths"
+      },
+      "discovery": {
+        "name": "Discovery",
+        "description": "Find suitable learning paths"
+      },
+      "organization": {
+        "name": "Organization",
+        "description": "Create your organization\n Build course\n Invite teacher"
+      }
+    },
+    "myLps": {
+      "menu": "My Learning Paths"
+    },
+    "discovery": {
+      "menu": "Discovery"
+    },
+    "organization": {
+      "menu": "Organization"
+    }
+  },
+  "categories": {
+    "geography": "Geography",
+    "literature": "Literature",
+    "chemistry": "Chemistry",
+    "history": "History",
+    "math": "Math",
+    "it": "IT",
+    "geometry": "Geometry",
+    "physicalEducation": "Physical Education",
+    "physics": "Physics",
+    "foreignLanguage": "Foreign Language",
+    "biology": "Biology"
+  },
+  "search": "Search",
+  "learningPath": {
+    "view": "View",
+    "information": "Information",
+    "category": "Category",
+    "completed": "Completed",
+    "description": "Description",
+    "outcomes": "Outcomes",
+    "rubrics": "Rubrics",
+    "tableOfContent": "Table of content",
+    "lessons": "Lessons",
+    "newPart": "New Part",
+    "newGroupActivity": "New group activity",
+    "name": "Name",
+    "share": "Share",
+    "clone": "Clone",
+    "setting": "Seting",
+    "public": "Public",
+    "publicDes": "Everybody can see this learning path with link",
+    "allowClone": "Allow clone",
+    "allowCloneDes": "Allow other user can clone this learning path",
+    "newLp": {
+      "dialogTitle": "Create new learning path",
+      "namePlaceholder": "Name",
+      "category": "Category",
+      "description":"Description",
+      "ok": "Create",
+      "cancel": "Cancel",
+      "lpType": "Learning path type",
+      "roadmap": "Roadmap",
+      "course": "Course / subject",
+      "forOgz": "Course"
+    }
+  },
+  "lesson": {
+    "outcomes": "Outcomes",
+    "knowledge": "Knowledge",
+    "skill": "Skill",
+    "attitude": "Attitude",
+    "content": "Content",
+    "preparation": "Preparation",
+    "preparationPlaceholder": "Preparation of this lesson",
+    "resources": "Resources",
+    "chooseFile": "Choose files",
+    "upload": "Upload",
+    "activities": "Activities",
+    "newActivity": "New activity",
+    "cannotUndo": "You can not undo this action",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "newActionName": "Action name"
+  },
+  "learningAction": {
+    "readWatchListen": "Read-Watch-Listen",
+    "collaborate": "Collaborate",
+    "discuss": "Discuss",
+    "investigate": "Investigate",
+    "practice": "Practice",
+    "produce": "Produce",
+    "onlineOrOffline": "Online or offline",
+    "resources": "Resources",
+    "save": "Save",
+    "cannotUndo": "You can not undo this action",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
+  "lessonUpdate": {
+    "name": "Lesson update histories",
+    "addLA": " add learning action ",
+    "delLA": " delete learning action ",
+    "addGA": " add group action ",
+    "delGA": " del group action ",
+    "rename": " rename ",
+    "to": " to ",
+    "from": " from ",
+    "markCompleted": " mark as completed ",
+    "markIncompleted": " mark as incompleted "
+  },
+  "button": {
+    "saveChange": "Save change",
+    "cancel": "Cancel"
+  },
+  "outcomes": {
+    "createNew": "Create new outcome",
+    "placeholderValue": "Outcome description",
+    "placeholderId": "Outcome name",
+    "addBefore": "Add outcome before",
+    "addAfter": "Add outcome after",
+    "delOutcome": "Delete outcome",
+    "addSub": "Add sub outcome"
+  },
+  "rubrics": {
+    "newRubric": "New rubric",
+    "title": "Select a rubric or create a new rubric",
+    "namePlaceholder": "Name",
+    "ok": "Create",
+    "cancel":"Cancel",
+    "questionByTopic": "Questions by topic",
+    "pointByTopic": "Point by topic",
+    "columnNamePlaceholder": "Column name",
+    "deleteColumn": "DeleteColumn",
+    "markTopicColumn": "Topic column",
+    "addSubColumn": "Add sub column",
+    "markSummary": "Summary column",
+    "newTopic": "Add new topic",
+    "delTopic": "Delelte topic",
+    "save": "Save"
+  }
+}

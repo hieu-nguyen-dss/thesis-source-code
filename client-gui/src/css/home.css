@@ -1,0 +1,29 @@
+.container {
+  padding-top: 90px;
+  display: flex;
+}
+
+.container .management-container {
+  flex: 1;
+  padding-left: 250px;
+  min-height: calc(100vh - 90px);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px 200px 0px 200px;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #4caf50;
+}
+
+p {
+  text-indent: 50px;
+  text-align: justify;
+  letter-spacing: 3px;
+}

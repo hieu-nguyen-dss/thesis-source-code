@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url(../shared/bootstrap.min.css);
+
+    body {
+      font-family: 'Roboto';
+    }
+  </style>
+  <link rel="stylesheet" href="index.css">
+  <script src="../shared/chart.min.js"></script>
+  <script src="index.js"></script>
+  <title>Rubric</title>
+</head>
+
+<body onload="loadRubric()">
+  <div class="container-rb">
+    <div class="rb-list" id="rb-list">
+    </div>
+    <div class="rb-detail">
+      <div class="rb-name" id="rb-name"></div>
+      <div class="chart-container">
+        <div class="chart" >
+          <canvas id="myChart" width="300" height="300"></canvas>
+        </div>
+        <div class="chart" >
+          <canvas id="myChart2" width="300" height="300"></canvas>
+        </div>
+      </div>
+      <div class="detail" id="detail"></div>
+    </div>
+  </div>
+</body>
+
+</html>

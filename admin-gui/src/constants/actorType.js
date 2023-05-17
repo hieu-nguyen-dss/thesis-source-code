@@ -1,0 +1,5 @@
+export default {
+  STUDENT: 'STUDENT',
+  ORGANIZATION: 'ORGANIZATION',
+  TEACHER: 'TEACHER'
+}

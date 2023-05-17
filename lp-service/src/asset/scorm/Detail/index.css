@@ -1,0 +1,146 @@
+.course-name {
+  margin: 30px;
+  color: #1976d2;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+}
+.container {
+  display: flex;
+  margin: 30px;
+}
+.main-info {
+  width: 30%;
+  min-width: 250px;
+  /* border-radius: 10px; */
+  padding: 10px;
+  border-top: 2px lightblue solid;
+}
+.content {
+  flex-grow: 1;
+  margin: 0px 20px;
+}
+.content .des-oc-rub {
+  display: flex;
+  justify-content: space-around;
+}
+
+.content .des-oc-rub .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px lightblue solid;
+  border-radius: 10px;
+  padding: 20px 30px;
+  margin: 0px 10px;
+}
+
+.content .des-oc-rub .item input[type="button"] {
+  /* font-weight: bold; */
+  margin-top: 10px;
+  cursor: pointer;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(to right, #f25e85, #6a82fb);
+  height: 35px;
+  width: 150px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.47, 1.64, 0.41, 0.8) 0s;
+}
+.main-info-title {
+  color: grey;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.main-info-item {
+  margin-top: 10px;
+  display: flex;
+}
+.main-info-item .item-name {
+  color: lightslategray;
+  min-width: 80px;
+  font-size: 14px;
+}
+.main-info-item .item-value {
+  margin-left: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  color: rgb(88, 88, 88);
+  flex-grow: 1;
+}
+
+.table-of-content {
+  margin: 0px 10px;
+  margin-top: 15px;
+}
+
+.table-of-content .title {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  color: lightslategray;
+  font-weight: bold;
+}
+
+.owner {
+  display: flex;
+  align-items: center;
+}
+
+.owner .avatar img{
+  border-radius: 50%;
+}
+
+.owner .owner-name {
+  text-decoration: none;
+  color: #1976d2;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.table-of-content .chapter-lessons {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-of-content .lesson {
+  border: none;
+  text-align: left;
+  margin-top: 5px;
+  background-color: white;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.table-of-content .lesson:hover {
+  background-color: lightblue;
+  transition: all 0.5s;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+

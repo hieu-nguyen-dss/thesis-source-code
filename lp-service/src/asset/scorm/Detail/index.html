@@ -1,0 +1,95 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    @import url(../shared/bootstrap.min.css);
+
+    body {
+      font-family: 'Roboto';
+    }
+  </style>
+  <title>Detail</title>
+  <script src="../shared/scormfunctions.js" type="text/javascript"></script>
+  <script src="learning-path.js" type="text/javascript"></script>
+</head>
+
+<body onload="loadData('Detail')">
+  <div class="course-name" id="course-name"></div>
+  <!-- Scrollable modal -->
+  <div class="modal fade" id="exampleModalToggle" aria-labelledby="exampleModalToggleLabel" tabindex="-1"
+    aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel">Description</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="description">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="main-info">
+      <div class="main-info-title">Information</div>
+      <div class="main-info-item">
+        <div class="item-name">Name</div>
+        <div class="item-value" id="info-name"></div>
+      </div>
+      <div class="main-info-item">
+        <div class="item-name">ID</div>
+        <div class="item-value" id="info-id"></div>
+      </div>
+      <div class="main-info-item">
+        <div class="item-name">Owner</div>
+        <div class="item-value">
+          <div class="owner">
+            <div class="avatar">
+              <img id="avatar"
+                src="https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg"
+                alt="ava" width="40" height="40">
+            </div>
+            <a class="owner-name" href="#" id="info-owner-name"></a>
+          </div>
+        </div>
+      </div>
+      <div class="main-info-item">
+        <div class="item-name">Category</div>
+        <div class="item-value" id="category"></div>
+      </div>
+      <div class="main-info-item">
+        <div class="item-name">Stars</div>
+        <div class="item-value" id="stars"></div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="des-oc-rub">
+        <div class="item description">
+          <img src="document.png" alt="description" width="150" height="150">
+          <input type="button" value="Description" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#exampleModalToggle">
+        </div>
+        <div class="item outcomes">
+          <img src="objective.png" alt="Outcomes" width="150" height="150">
+          <input type="button" value="Outcomes" onclick="goToOutcome()" >
+        </div>
+        <div class="item rubrics">
+          <img src="exam.png" alt="Rubric" width="150" height="150">
+          <input type="button" value="Rubrics" onclick="goToRubrics()">
+        </div>
+      </div>
+      <div class="table-of-content">
+        <div class="title">Table of content</div>
+        <div class="accordion accordion-success" id="chapter-list">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../shared/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

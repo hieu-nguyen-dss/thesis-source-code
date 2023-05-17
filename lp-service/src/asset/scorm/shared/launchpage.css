@@ -1,0 +1,58 @@
+body {
+  background: rgb(240, 242, 245);
+  padding: 10px;
+}
+.course {
+  display: flex;
+  margin: 10px;
+}
+.nav-button {
+  width: 150px;
+}
+.input-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: white;
+  height: 35px;
+  width: 150px;
+  margin-top: 5px;
+  border: 1px solid rgb(53 177 229);
+  border-radius: 5px;
+  color: rgb(1, 155, 221);
+  font-weight: bold;
+  font-size: 14px;
+}
+.input-btn div {
+  margin-left: 5px;
+}
+.main-content {
+  flex-grow: 1;
+  margin-left: 10px;
+  border-radius: 10px;
+  background-color: white;
+  border: none;
+  height: calc(100vh - 40px);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+

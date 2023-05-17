@@ -1,0 +1,345 @@
+{
+  "auth": {
+    "login": {
+      "password": "Password"
+    },
+    "logout": "Logout"
+  },
+  "pages": {
+    "settings": {
+      "menu": "Setting",
+      "language": "Language"
+    },
+    "profile": {
+      "menu": "Profile"
+    },
+    "home": {
+      "menu": "Home",
+      "getStarted": "Get Started",
+      "description": "Support student's learning\nCreating and sharing your Learning Path",
+      "myLps": {
+        "name": "My Learning Paths",
+        "description": "Manage your learning paths"
+      },
+      "discovery": {
+        "name": "Discovery",
+        "description": "Find suitable learning paths"
+      },
+      "organization": {
+        "name": "Organization",
+        "description": "Create your organization\n Build course\n Invite teacher"
+      },
+      "questionManagement": {
+        "name": "Question Management",
+        "description": "Manage questions"
+      },
+      "examManagement": {
+        "name": "Exam Management",
+        "description": "Manage exams"
+      }
+    },
+    "myLps": {
+      "menu": "My Learning Paths"
+    },
+    "discovery": {
+      "menu": "Discovery"
+    },
+    "organization": {
+      "menu": "Organization"
+    },
+    "questionManagement": {
+      "menu": "Question Management"
+    },
+    "examManagement": {
+      "menu": "Exam Management"
+    }
+  },
+  "categories": {
+    "all": "All",
+    "geography": "Geography",
+    "literature": "Literature",
+    "chemistry": "Chemistry",
+    "history": "History",
+    "math": "Math",
+    "it": "IT",
+    "geometry": "Geometry",
+    "physicalEducation": "Physical Education",
+    "physics": "Physics",
+    "foreignLanguage": "Foreign Language",
+    "biology": "Biology",
+    "deleteFilter": "Delete filters"
+  },
+  "search": "Search",
+  "learningPath": {
+    "learningPath": "Learning Paths",
+    "tabCourse": "Courses",
+    "tabRoadmap": "Roadmaps",
+    "view": "View",
+    "information": "Information",
+    "owner": "Owner",
+    "stars": "Stars",
+    "category": "Category",
+    "completed": "Completed",
+    "description": "Description",
+    "outcomes": "Outcomes",
+    "rubrics": "Rubrics",
+    "tableOfContent": "Table of content",
+    "lessons": "Lessons",
+    "newPart": "New Part",
+    "newGroupActivity": "New group activity",
+    "name": "Name",
+    "export": "Export to SCORM",
+    "share": "Share",
+    "clone": "Clone",
+    "setting": "Seting",
+    "public": "Public",
+    "publicDes": "Everybody can see this learning path with link",
+    "allowClone": "Allow clone",
+    "allowCloneDes": "Allow other user can clone this learning path",
+    "deleteDes": "You can not restore this course after deleting",
+    "delete": "Delete course",
+    "editors": "Editors",
+    "editorDes": "Specify who can edit this course",
+    "newLp": {
+      "dialogTitle": "Create new learning path",
+      "namePlaceholder": "Name",
+      "category": "Category",
+      "description": "Description",
+      "ok": "Create",
+      "cancel": "Cancel",
+      "lpType": "Learning path type",
+      "roadmap": "Roadmap",
+      "course": "Course",
+      "forOgz": "Course"
+    }
+  },
+  "lesson": {
+    "outcomes": "Outcomes",
+    "knowledge": "Knowledge",
+    "skill": "Skill",
+    "attitude": "Attitude",
+    "content": "Content",
+    "preparation": "Preparation",
+    "preparationPlaceholder": "Preparation of this lesson",
+    "resources": "Resources",
+    "chooseFile": "Choose files",
+    "upload": "Upload",
+    "activities": "Activities",
+    "newActivity": "New activity",
+    "cannotUndo": "You can not undo this action",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "newActionName": "Action name",
+    "save": "Save change",
+    "newContent": "New content",
+    "newGroupActivity": "New group activity",
+    "groupActName": "Name"
+  },
+  "learningAction": {
+    "READ_WATCH_LISTEN": "Read-Watch-Listen",
+    "COLLABORATE": "Collaborate",
+    "DISCUSS": "Discuss",
+    "INVESTIGATE": "Investigate",
+    "PRACTICE": "Practice",
+    "PRODUCE": "Produce",
+    "onlineOrOffline": "Online or offline",
+    "resources": "Resources",
+    "save": "Save",
+    "cannotUndo": "You can not undo this action",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "newName": "Action name",
+    "descriptionn": "Description"
+  },
+  "lessonUpdate": {
+    "name": "Lesson update histories",
+    "addLA": " add learning action ",
+    "delLA": " delete learning action ",
+    "addGA": " add group action ",
+    "delGA": " del group action ",
+    "rename": " rename ",
+    "to": " to ",
+    "from": " from ",
+    "markCompleted": " mark as completed ",
+    "markIncompleted": " mark as incompleted "
+  },
+  "button": {
+    "saveChange": "Save change",
+    "cancel": "Cancel"
+  },
+  "outcomes": {
+    "createNew": "Create new outcome",
+    "placeholderValue": "Outcome description",
+    "placeholderId": "Outcome name",
+    "addBefore": "Add outcome before",
+    "addAfter": "Add outcome after",
+    "delOutcome": "Delete outcome",
+    "addSub": "Add sub outcome"
+  },
+  "rubrics": {
+    "newRubric": "New rubric",
+    "title": "Select a rubric or create a new rubric",
+    "namePlaceholder": "Name",
+    "ok": "Create",
+    "cancel": "Cancel",
+    "questionByTopic": "Questions by topic",
+    "pointByTopic": "Point by topic",
+    "columnNamePlaceholder": "Column name",
+    "deleteColumn": "DeleteColumn",
+    "markTopic": "Topic column",
+    "unMarkTopic": "Unmark topic column",
+    "addSubColumn": "Add sub column",
+    "markSummary": "Summary column",
+    "unmarkSummary": "Unmark summary column",
+    "newTopic": "Add new topic",
+    "delTopic": "Delelte topic",
+    "save": "Save",
+    "points": "Points",
+    "questions": "Questions",
+    "knowledge": "Knowledge"
+  },
+  "menus": {
+    "dashboard": "Dashboard",
+    "learningPath": "Learning Path",
+    "organization": "Organization",
+    "discovery": "Discovery",
+    "questionManagement": "Question Management",
+    "examManagement": "Exam Management",
+    "close": "Close"
+  },
+  "dashboard": {
+    "name": "Learning path analysis",
+    "totalCourse": "Total courses",
+    "totalRoadmap": "Total roadmaps",
+    "top10Course": "Top 10 starred courses",
+    "top10Roadmap": "Top 10 starred roadmaps",
+    "top10Follow": "Top10 followed roadmaps",
+    "courseName": "Name",
+    "stars": "Stars",
+    "followers": "Followers",
+    "top10UserCourse": "Top 10 users with the most course stars",
+    "top10UserRoadmap": "Top 10 users with the most roadmap stars",
+    "totalStars": "Total stars"
+  },
+  "organization": {
+    "create": "Create new organization",
+    "namePlaceholder": "Organization name",
+    "type": {
+      "name": "Type",
+      "school": "School",
+      "academy": "Academy"
+    },
+    "description": "Description",
+    "ok": "Create",
+    "cancel": "Cancel",
+    "information": "Information",
+    "detail": "Detail",
+    "course": "Courses",
+    "name": "Organization name",
+    "address": "Address",
+    "category": "Category",
+    "email": "Email",
+    "phone": "Phone",
+    "foundDate": "Found date",
+    "updateInfo": "Update information",
+    "update": "update",
+    "members": {
+      "members": "Members",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "action": "Action",
+      "removeAsAdmin": "Remove member as admin",
+      "addAsAdmin": "Add member as admin",
+      "leave": "Leave organization",
+      "remove": "Remove member",
+      "addAsAdminNote": "Admin can invite new member, remove member, create / delete course and change edit permission for all course",
+      "ok": "OK",
+      "cancel": "Cancel",
+      "removeNote": "We will revoke all role of this memeber in all learning paths",
+      "removeAsAdminNote": "Members are only allowed to view and edit the learning path if they have permission",
+      "addMember": "Add member",
+      "findMember": "Find user to whom you want invite",
+      "findMemberNote": "Input email or name of people of whom you want to invite",
+      "emallName": "Email / Name",
+      "sendEmail": "Send invite email",
+      "admin": "ADMIN",
+      "member": "MEMBER"
+    }
+  },
+  "discovery": {
+    "category": "Category",
+    "roadmap": "Roadmap",
+    "search": "Search",
+    "course": "Course",
+    "mostStar": "The most star",
+    "deleteFilter": "Delete filters",
+    "parts": "parts",
+    "steps": "steps",
+    "createdAt": "Created at",
+    "lastUpdated": "Last updated at",
+    "comments": "comments"
+  },
+  "profile": {
+    "student": "STUDENT",
+    "teacher": "TEACHER",
+    "contact": "Contact",
+    "courses": "Courses",
+    "roadmaps": "Roadmaps",
+    "following": "Following roadmaps"
+  },
+  "comment": {
+    "name": "Comments",
+    "startComment": "Start comment"
+  },
+  "notif": {
+    "name": "Notifications",
+    "CMT_RM": "Comment roadmap",
+    "CMT_LP": "Comment learningpath",
+    "CMT_LS": "Comment lesson",
+    "ADD_RM_CL": "Add roadmap outcome",
+    "DONE_RM_CL": "Done roadmap outcome",
+    "FOLLOW_RM": "Follow roadmap",
+    "STAR_RM": "Star roadmap",
+    "STAR_LP": "Star learning path",
+    "REMIND_ROADMAP": "Your roadmap step will expire",
+    "older": "Older",
+    "forStep": "for step",
+    "ofCourse": "of course",
+    "ofRoadmap": "of roadmap"
+  },
+  "roadmap": {
+    "name": "Roadmap",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "follower": "Follower",
+    "followers": "Followers",
+    "days": "days",
+    "day": "day",
+    "required": "Required",
+    "optional": "Optional",
+    "hours": "hours",
+    "minutes": "minutes",
+    "hour": "hour",
+    "newStep": "New step",
+    "stepName": "Step name",
+    "create": "Create",
+    "editStep": "Edit step",
+    "update": "Update",
+    "time": "Time",
+    "left": "left",
+    "expired": "Expired",
+    "startDate": "Start date",
+    "finishDate": "Finish date",
+    "remindBefore": "Remind bebore finishing",
+    "checklist": "Checklist",
+    "completedAt": "Completed at",
+    "newItem": "New item",
+    "newItemName": "Item name",
+    "resources": "Resources",
+    "chooseFile": "Choose files",
+    "upload": "Upload",
+    "addLink": "Add reference URL",
+    "description": "Description"
+  }
+}

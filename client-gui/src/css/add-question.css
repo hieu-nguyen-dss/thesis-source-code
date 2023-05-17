@@ -1,0 +1,22 @@
+.addQuestionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+  /* margin-bottom: 10px; */
+}
+.addQuestionButton {
+  display: flex;
+  justify-content: center;
+}
+.question-detail {
+  margin-top: 20px;
+}
+.container-add-question {
+  padding: 20px;
+}
+.key {
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+}

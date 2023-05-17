@@ -1,0 +1,23 @@
+{
+  "menus": {
+    "dashboard": "Dashboard",
+    "learningPath": "Learning Path",
+    "organization": "Organization",
+    "discovery": "Discovery",
+    "close": "Close"
+  },
+  "dashboard": {
+    "name": "Learning path analysis",
+    "totalCourse": "Total courses",
+    "totalRoadmap": "Total roadmaps",
+    "top10Course": "Top 10 starred courses",
+    "top10Roadmap": "Top 10 starred roadmaps",
+    "top10Follow": "Top10 followed roadmaps",
+    "courseName": "Name",
+    "stars": "Stars",
+    "followers": "Followers"
+  },
+  "learningPath": {
+    
+  }
+}

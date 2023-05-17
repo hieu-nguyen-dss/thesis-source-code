@@ -1,0 +1,93 @@
+.container-rb {
+  display: flex;
+}
+
+.rb-list {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  margin-right: 0px;
+}
+
+.rb-list button {
+  cursor: pointer;
+  background: none;
+  border-radius: 5px;
+  padding: 5px;
+  border: 2px solid rgb(41, 176, 0);
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.rb-list button:hover {
+  background-color: rgb(41, 176, 0);
+  color: white;
+  transition: .3s all;
+}
+
+.rb-detail {
+  flex-grow: 1;
+}
+
+.rb-name {
+  margin: 10px;
+  font-weight: bold;
+  color: rgb(12, 182, 0);
+}
+
+.chart-container {
+  display: flex;
+}
+
+.chart {
+  width: 300px;
+  height: 300px;
+}
+
+.table-rb {
+  font-size: 14px;
+  margin: 10px;
+  width: calc(100% - 20px);
+}
+
+th, td {
+  border: 0.5px solid rgb(119, 119, 119);
+  border-collapse: collapse;
+  padding: 8px;
+}
+
+th {
+  text-align: center;
+}
+
+
+
+.topic {
+  color: rgb(0, 150, 20);
+}
+
+td label {
+  display: block;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

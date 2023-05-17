@@ -1,0 +1,14 @@
+.menuItem {
+    color: black;
+    font-style: initial;
+}
+.menuRight {
+    display: flex;
+    justify-content: flex-start;
+}
+.nonActive {
+    display: none;
+}
+.Active {
+    display: block;
+}

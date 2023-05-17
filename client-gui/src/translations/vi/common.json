@@ -1,0 +1,345 @@
+{
+  "auth": {
+    "login": {
+      "password": "Mật khẩu"
+    },
+    "logout": "Đăng xuất"
+  },
+  "pages": {
+    "settings": {
+      "menu": "Cài đặt",
+      "language": "Ngôn ngữ"
+    },
+    "profile": {
+      "menu": "Thông tin"
+    },
+    "home": {
+      "menu": "Trang chủ",
+      "getStarted": "Bắt đầu",
+      "description": "Hỗ trợ quá trình học tập cho học sinh\nTạo và chia sẻ lộ trình học tập đến mọi người",
+      "myLps": {
+        "name": "Lộ trình",
+        "description": "Quản lý lộ trình học tập"
+      },
+      "discovery": {
+        "name": "Khám phá",
+        "description": "Tìm kiếm các lộ trình học tập phù hợp với nhu cầu   "
+      },
+      "organization": {
+        "name": "Tổ chức",
+        "description": "Tạo tổ chức của bạn\n Xây dựng khóa học\n Tìm kiếm giáo viên cho khóa học"
+      },
+      "questionManagement": {
+        "name": "Quản lí câu hỏi",
+        "description": "Quản lí câu hỏi"
+      },
+      "examManagement": {
+        "name": "Quản lí đề thi",
+        "description": "Quản lí đề thi"
+      }
+    },
+    "myLps": {
+      "menu": "Lộ trình học tập"
+    },
+    "discovery": {
+      "menu": "Khám phá"
+    },
+    "organization": {
+      "menu": "Tổ chức"
+    },
+    "questionManagement": {
+      "menu": "Quản lí câu hỏi"
+    },
+    "examManagement": {
+      "menu": "Quản lí đề thi"
+    }
+  },
+  "categories": {
+    "all": "Tất cả",
+    "geography": "Địa lý",
+    "literature": "Văn học",
+    "chemistry": "Hóa học",
+    "history": "Lịch sử",
+    "math": "Đại số",
+    "it": "Tin học",
+    "geometry": "Hình học",
+    "physicalEducation": "Thể chất",
+    "physics": "Vật lý",
+    "foreignLanguage": "Ngoại ngữ",
+    "biology": "Sinh học",
+    "deleteFilter": "Xóa bộ lọc"
+  },
+  "search": "Tìm kiếm",
+  "learningPath": {
+    "learningPath": "Lộ trình học tập",
+    "tabCourse": "Khóa học",
+    "tabRoadmap": "Roadmap",
+    "view": "Xem chi tiết",
+    "information": "Thông tin chung",
+    "owner": "Người tạo",
+    "stars": "Lượt thích",
+    "category": "Danh mục",
+    "completed": "Mức độ hoàn thành",
+    "description": "Mô tả",
+    "outcomes": "Mục tiêu",
+    "rubrics": "Ma trận ra đề thi",
+    "tableOfContent": "Mục lục",
+    "lessons": "Bài học",
+    "newPart": "Thêm chương mới",
+    "newGroupActivity": "Thêm nhóm hoạt động",
+    "name": "Tên nhóm hoạt động",
+    "export": "Xuất ra chuẩn SCORM",
+    "share": "Chia sẻ",
+    "clone": "Tạo bản sao",
+    "setting": "Cài đặt",
+    "public": "Công khai",
+    "publicDes": "Mọi người có đều có thể xem lộ trình học tập này nếu có link",
+    "allowClone": "Cho phép tạo bản sao",
+    "allowCloneDes": "Cho phép mọi người có thể tạo bản sao từ lộ trình học tập này",
+    "deleteDes": "Bạn sẽ không thể khôi phục khóa học này",
+    "delete": "Xóa khóa học",
+    "editors": "Người chỉnh sửa",
+    "editorDes": "Chỉ ra người có thể chỉnh sửa khóa học này",
+    "newLp": {
+      "dialogTitle": "Tạo lộ trình học tập mới",
+      "namePlaceholder": "Tên lộ trình",
+      "category": "Danh mục",
+      "description":"Mô tả",
+      "ok": "Tạo",
+      "cancel": "Hủy",
+      "lpType": "Loại lộ trình",
+      "roadmap": "Roadmap",
+      "course": "Khóa học",
+      "forOgz": "Khóa học"
+    }
+  },
+  "lesson": {
+    "outcomes": "Mục tiêu",
+    "knowledge": "Kiến thức",
+    "skill": "Kỹ năng",
+    "attitude": "Thái độ",
+    "content": "Nội dung",
+    "preparation": "Chuẩn bị",
+    "preparationPlaceholder": "Bạn phải chuẩn bị những gì cho bài học",
+    "resources": "Tài liệu",
+    "chooseFile": "Chọn file",
+    "upload": "Tải lên",
+    "activities": "Hoạt động chính",
+    "newActivity": "Thêm hoạt động mới",
+    "cannotUndo": "Bạn sẽ không thể khôi phục hành động xóa",
+    "delete": "Xóa",
+    "cancel": "Hủy",
+    "newActionName": "Tên hoạt động mới",
+    "save": "Lưu thay đổi",
+    "newContent": "Thêm nội dung",
+    "newGroupActivity": "Thêm nhóm hoạt động",
+    "groupActName": "Tên nhóm hoạt động"
+  },
+  "learningAction": {
+    "READ_WATCH_LISTEN": "Đọc-Nghe giảng",
+    "COLLABORATE": "Làm việc nhóm",
+    "DISCUSS": "Thảo luận",
+    "INVESTIGATE": "Nghiên cứu",
+    "PRACTICE": "Thực hành",
+    "PRODUCE": "Làm sản phẩm",
+    "onlineOrOffline": "Online hoặc offline",
+    "resources": "Tài nguyên",
+    "save": "Lưu",
+    "cannotUndo": "Bạn sẽ không thể khôi phục hành động xóa",
+    "delete": "Xóa",
+    "cancel": "Hủy",
+    "newName": "Tên hoạt động",
+    "descriptionn": "Mô tả hoạt động"
+  },
+  "lessonUpdate": {
+    "name": "Nhật ký cập nhật hoạt động",
+    "addLA": " thêm hoạt động ",
+    "delLA": " xóa hoạt động ",
+    "addGA": " thêm nhóm hoạt động ",
+    "delGA": " xóa nhóm hoạt động ",
+    "rename": " đổi tên ",
+    "to": " từ ",
+    "from": " thành ",
+    "markCompleted": " đánh dấu đã hoàn thành ",
+    "markIncompleted": " bỏ đánh dấu đã hoàn thành "
+  },
+  "button": {
+    "saveChange": "Lưu thay đổi",
+    "cancel": "Hủy"
+  },
+  "outcomes": {
+    "createNew": "Tạo mục tiêu mới",
+    "placeholderValue": "Mô tả cho mục tiêu",
+    "placeholderId": "Tên mục tiêu",
+    "addBefore": "Thêm một mục tiêu bên trên",
+    "addAfter": "Thêm một mục tiêu bên dưới",
+    "delOutcome": "Xóa mục tiêu",
+    "addSub": "Thêm mục tiêu nhỏ"
+  },
+  "rubrics": {
+    "newRubric": "Tạo mới",
+    "title": "Chọn một ma trận ra đề",
+    "namePlaceholder": "Tên ma rubric",
+    "ok": "Tạo",
+    "cancel":"Hủy",
+    "questionByTopic": "Câu hỏi / chủ đề",
+    "pointByTopic": "Điểm / chủ đề",
+    "columnNamePlaceholder": "Tên cột",
+    "deleteColumn": "Xóa cột",
+    "markTopic": "Cột chủ đề",
+    "unmarkTopic": "Cột mức độ",
+    "addSubColumn": "Tách cột",
+    "markSummary": "Cột tổng kết",
+    "unmarkSummary": "Cột mức độ",
+    "newTopic": "Thêm chủ đề",
+    "delTopic": "Xóa chủ đề",
+    "save": "Lưu",
+    "points": "Số điểm",
+    "questions": "Số câu",
+    "knowledge": "Kiến thức"
+  },
+  "menus": {
+    "dashboard": "Thống kê",
+    "learningPath": "Lộ trình",
+    "organization": "Tổ chức",
+    "discovery": "Khám phá",
+    "questionManagement": "Quản lí câu hỏi",
+    "examManagement": "Quản lí đề thi",
+    "close": "Thu nhỏ"
+  },
+  "dashboard": {
+    "name": "Thống kê lộ trình",
+    "totalCourse": "Tổng số khóa học hihihi",
+    "totalRoadmap": "Tổng số roadmap",
+    "top10Course": "Top 10 khóa học được yêu thích",
+    "top10Roadmap": "Top 10 roadmap được yêu thích",
+    "top10Follow": "Top10 roadmap nhiều lượt theo dõi nhất",
+    "courseName": "Tên",
+    "stars": "Lượt thích",
+    "followers": "Lượt theo dõi",
+    "top10UserCourse": "Top 10 người dùng có nhiều lượt thích khóa học nhất",
+    "top10UserRoadmap": "Top 10 người dùng có nhiều lượt thích roadmap nhất",
+    "totalStars": "Tổng lượt thích"
+  },
+  "organization": {
+    "create": "Tạo tổ chức mới",
+    "namePlaceholder": "Tên tổ chức",
+    "type": {
+      "name": "Loại hình",
+      "school": "Trường học",
+      "academy": "Trung tâm dạy học"
+    },
+    "description": "Thông tin mô tả",
+    "ok": "Tạo",
+    "cancel":"Hủy",
+    "information": "Thông tin giới thiệu",
+    "detail": "Thông tin chi tiết",
+    "course": "Khóa học",
+    "name": "Tên tổ chức",
+    "address": "Địa chỉ",
+    "category": "Lĩnh vực",
+    "email": "Email",
+    "phone": "Số diện thoại",
+    "foundDate": "Ngày thành lập",
+    "updateInfo": "Cập nhật thông tin",
+    "update": "Cập nhật",
+    "members": {
+      "members": "Thành viên",
+      "name": "Tên",
+      "email": "Email",
+      "role": "Vai trò",
+      "action": "Hành động",
+      "removeAsAdmin": "Gỡ vai trò quản trị viên",
+      "addAsAdmin": "Thêm làm quản trị viên",
+      "leave": "Rời tổ chức",
+      "remove": "Xóa thành viên",
+      "addAsAdminNote": "Quản trị viên có thể mời thành viên mới, xóa thành viên (kể cả quản trị viên khác), tạo mới / xóa và cung cấp quyền chỉnh sửa khóa học cho các thành viên.",
+      "ok": "OK",
+      "cancel": "Hủy",
+      "removeNote": "Người dùng này sẽ bị thu hồi các quyền với các khóa học trong tổ chức",
+      "removeAsAdminNote": "Thành viên chỉ có thể xem và chỉnh sửa khóa học nếu như họ được các quản trị viên cho phép.",
+      "addMember": "Thêm thành viên",
+      "findMember": "Tìm một người dùng mà bạn muốn mời",
+      "findMemberNote": "Nhập tên hoặc email của người dùng",
+      "emallName": "Email / Tên",
+      "sendEmail": "Gửi email",
+      "admin": "Quản trị viên",
+      "member": "Thành viên"
+    }
+  },
+  "discovery": {
+    "category": "Danh mục",
+    "roadmap": "Roadmap",
+    "search": "Tìm kiếm",
+    "course": "Khóa học",
+    "mostStar": "Nhiều lượt thích nhất",
+    "deleteFilter": "Xóa bộ lọc",
+    "parts": "phần",
+    "steps": "bước",
+    "createdAt": "Ngày tạo: ",
+    "lastUpdated": "Cập nhật lần cuối: ",
+    "comments": "bình luận"
+  },
+  "profile": {
+    "student": "HỌC SINH",
+    "teacher": "GIÁO VIÊN",
+    "contact": "Liên hệ",
+    "courses": "Khóa học",
+    "roadmaps": "Roadmaps",
+    "following": "Roadmap đang theo dõi"
+  },
+  "comment": {
+    "name": "Bình luận",
+    "startComment": "Viết bình luận"
+  },
+  "notif": {
+    "name": "Thông báo",
+    "CMT_RM": "Bình luận roadmap",
+    "CMT_LP": "Bình luận khóa học",
+    "CMT_LS": "Bình luận bài học",
+    "ADD_RM_CL": "Thêm mục tiêu cho roadmap",
+    "DONE_RM_CL": "Hoàn thành mục tiêu roadmap",
+    "FOLLOW_RM": "Theo dõi roadmap",
+    "STAR_RM": "Thích roadmap",
+    "STAR_LP": "Thích khóa học",
+    "REMIND_ROADMAP": "Bước roadmap sẽ hết hạn",
+    "older": "Cũ hơn",
+    "forStep": "cho bước",
+    "ofCourse": "của khóa học",
+    "ofRoadmap": "của roadmap"
+  },
+  "roadmap": {
+    "name": "Roadmap",
+    "follow": "Theo dõi",
+    "unfollow": "Bỏ theo dõi",
+    "follower": "Người theo dõi",
+    "followers": "Người theo dõi",
+    "days": "ngày",
+    "day": "ngày",
+    "required": "Bắt buộc",
+    "optional": "Tự chọn",
+    "hours": "giờ",
+    "minutes": "phút",
+    "hour": "giờ",
+    "newStep": "Thêm bước",
+    "stepName": "Tên bước mới",
+    "create": "Tạo bước",
+    "editStep": "Chỉnh sửa bước",
+    "update": "Cập nhật",
+    "time": "Thời gian",
+    "left": "còn lại",
+    "expired": "Hết hạn",
+    "startDate": "Ngày bắt đầu",
+    "finishDate": "Ngày kết thúc",
+    "remindBefore": "Nhắc nhở trước khi kết thúc",
+    "checklist": "Mục tiêu",
+    "completedAt": "Hoàn thành lúc",
+    "newItem": "Thêm mục tiêu",
+    "newItemName": "Tên mục tiêu",
+    "resources": "Tài liệu",
+    "chooseFile": "Chọn file",
+    "upload": "Tải lên",
+    "addLink": "URL tham khảo",
+    "description": "Mô tả"
+  }
+}

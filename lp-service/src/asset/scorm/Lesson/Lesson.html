@@ -1,0 +1,90 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+  <style>
+    @import url(../shared/bootstrap.min.css);
+    body {
+      font-family: 'Roboto';
+    }
+  </style>
+  <link rel="stylesheet" href="lesson.css">
+  <title>Lesson </title>
+  <script src="../shared/scormfunctions.js" type="text/javascript"></script>
+  <script src="../shared/chart.min.js"></script>
+  <script src="../shared/bootstrap.bundle.min.js"></script>
+  <script src="../shared/FileSaver.js"></script>
+  <script src="lesson.js" type="text/javascript"></script>
+</head>
+
+<body onload="loadLesson()">
+  <div class="lesson-name" id="lesson-name">NAME</div>
+  <div class="lesson-field outcomes">
+    <div class="field-name">Outcomes</div>
+    <div class="outcomes-detail">
+      <div class="outcome-type">
+        <div class="knowledge">Knowledge</div>
+        <div>
+          <ul id="knowledge">
+          </ul>
+        </div>
+      </div>
+      <div class="outcome-type">
+        <div class="skill">Skill</div>
+        <div>
+          <ul id="skill">
+          </ul>
+        </div>
+      </div>
+      <div class="outcome-type">
+        <div class="attitude">Attitude</div>
+        <div>
+          <ul id="attitude">
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lesson-field content">
+    <div class="field-name">Content</div>
+    <ol class="content-detail" id="content-detail">
+    </ol>
+  </div>
+  <div class="lesson-field preparation">
+    <div class="field-name">Preparation</div>
+    <div class="preparation-detail" id="preparation">
+    </div>
+  </div>
+  <div class="lesson-field resources">
+    <div class="field-name">Resources</div>
+    <div class="resources-detail">
+      <div class="images col">
+        <div class="rs-title">Images</div>
+        <div class="container">
+          <div class="row row-cols-3" id="images">
+          </div>
+        </div>
+      </div>
+      <div class="others col">
+        <div class="rs-title">Other types</div>
+        <div id="others">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lesson-field activities">
+    <div class="field-name">Activities</div>
+    <div class="bound-act">
+      <div class="act-container" id="act-container">
+      </div>
+      <div class="statistic">
+        <canvas id="my-chart" width="400" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+module.exports = {
+  ORGANIZATION: 'ORGANIZATION',
+  STUDENT: 'STUDENT',
+  TEACHER: 'TEACHER'
+}

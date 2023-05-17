@@ -1,0 +1,12 @@
+
+.content-del{
+  animation: appear 0.5s;
+}
+@keyframes appear {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 20px;
+  }
+}

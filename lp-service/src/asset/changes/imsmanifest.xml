@@ -1,0 +1,61 @@
+<?xml version="1.0" standalone="no" ?>
+<!--
+Single SCO with basic runtime calls. SCORM 2004 3rd Edition.
+
+Provided by Rustici Software - http://www.scorm.com
+
+This example demonstrates the use of basic runtime calls in a multi-page SCO. It
+includes a demonstration of bookmarking, status reporting (completion and success), 
+score and time. It also includes the addition of a basic "controller" for providing
+intra-SCO navigation.
+-->
+
+<manifest identifier="com.scorm.golfsamples.runtime.basicruntime.20043rd" version="1"
+  xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3"
+  xmlns:adlseq="http://www.adlnet.org/xsd/adlseq_v1p3"
+  xmlns:adlnav="http://www.adlnet.org/xsd/adlnav_v1p3"
+  xmlns:imsss="http://www.imsglobal.org/xsd/imsss" xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd
+                              http://www.adlnet.org/xsd/adlcp_v1p3 adlcp_v1p3.xsd
+                              http://www.adlnet.org/xsd/adlseq_v1p3 adlseq_v1p3.xsd
+                              http://www.adlnet.org/xsd/adlnav_v1p3 adlnav_v1p3.xsd
+                              http://www.imsglobal.org/xsd/imsss imsss_v1p0.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>2004 3rd Edition</schemaversion>
+  </metadata>
+  <organizations default="golf_sample_default_org">
+    <organization identifier="golf_sample_default_org" adlseq:objectivesGlobalToSystem="false">
+      <title>COURSE_NAME</title>
+      <item identifier="item_1" identifierref="resource_1">
+        <title>COURSE_NAME</title>
+        <!-- Include some basic sequencing information that overrides the defaults-->
+        <imsss:sequencing>
+          <imsss:deliveryControls completionSetByContent="true" objectiveSetByContent="true"/>
+        </imsss:sequencing>
+      </item>
+      <imsss:sequencing>
+        <imsss:controlMode choice="true" flow="true"/>
+      </imsss:sequencing>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="resource_1" type="webcontent" adlcp:scormType="sco" href="shared/launchpage.html">
+      <file href="Detail/index.html"/>
+      <file href="Lesson/Lesson.html"/>
+      <file href="Outcome/index.html"/>
+      <file href="Rubric/index.html"/>
+      <file href="shared/learning-path.js"/>
+      <file href="shared/launchpage.html"/>
+      <file href="shared/scormfunctions.js"/>
+      <file href="shared/style.css"/>
+      <file href="shared/bootstrap.min.css"/>
+      <file href="shared/bootstrap.bundle.min.js"/>
+      <file href="shared/bootstrap.min.css"/>
+      <file href="shared/FileSaver.js"/>
+      <file href="data/data.json"/>
+    </resource>
+  </resources>
+</manifest>

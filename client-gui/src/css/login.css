@@ -1,0 +1,19 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+input::placeholder {
+  font-weight: bold;
+  opacity: 0.5;
+  color: red;
+  margin-left: 20px;
+}
+
+.rightPath {
+  background: white;
+  font-family: montserrat, arial, verdana;
+  margin: 0;
+  padding: 20px;
+}
+
+.errorLogin {
+  color: red;
+}

@@ -1,0 +1,11 @@
+module.exports = {
+  CMT_RM: 'CMT_RM',
+  CMT_LP: 'CMT_LP',
+  CMT_LS: 'CMT_LS',
+  ADD_RM_CL: 'ADD_RM_CL',
+  DONE_RM_CL: 'DONE_RM_CL',
+  FOLLOW_RM: 'FOLLOW_RM',
+  STAR_RM: 'STAR_RM',
+  STAR_LP: 'STAR_LP',
+  REMIND_ROADMAP: 'REMIND_ROADMAP'
+}

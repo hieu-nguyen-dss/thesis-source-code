@@ -1,0 +1,107 @@
+.content {
+    padding-top: 50px;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.filterProd {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.filter {
+    background-color: #f1f5f8;
+    padding: 0.3rem 0.5rem;
+    border-color: transparent;
+    border-radius: 5px;
+}
+
+.formControl {
+    margin: 20px 0px;
+}
+
+.btnCate {
+    color: #617d98;
+    background-color: transparent;
+    text-transform: capitalize;
+    cursor: pointer;
+    padding: 0;
+    letter-spacing: 1px;
+    display: block;
+    margin: 10px 0;
+}
+
+.btnCate.active {
+    border: none;
+    border-bottom: 1px solid #617d98 !important;
+}
+
+.hi {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.hi span {
+    border: 2px solid black;
+    padding: 0 3px;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.hi .hiActive {
+    color: white;
+    background-color: black;
+}
+
+.sortInput {
+    border-color: transparent;
+    font-size: 1rem;
+    text-transform: capitalize;
+    padding: 0.25rem 0.5rem;
+}
+
+.item {
+    color: #4f4f4f;
+    padding: 20px 20px;
+    box-shadow: 5px 5px 10px gray;
+    text-align: center;
+    height: 300px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+.item img {
+    height: 150px;
+    width: 60%;
+    margin: 0 auto;
+}
+.item2 {
+    height: 200px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.item2 img {
+    height: 200px;
+    width: 200px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+.item2 .btn {
+    text-transform: uppercase;
+    background: #ab7a5f;
+    padding: .375rem .75rem;
+    letter-spacing: .1rem;
+    display: inline-block;
+    font-weight: 400;
+    transition: all .3s linear;
+    font-size: .875rem;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+    border-radius: .25rem;
+    border-color: transparent;
+    color: #eaded7 !important;
+}

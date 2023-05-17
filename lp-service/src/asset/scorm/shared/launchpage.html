@@ -1,0 +1,276 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>COURSE_NAME</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link rel="stylesheet" href="launchpage.css">
+  <script src="scormfunctions.js" type="text/javascript"></script>
+  <script type="text/javascript">
+
+    function setIframeHeight(id, navWidth) {
+      if (document.getElementById) {
+        var theIframe = document.getElementById(id);
+        if (theIframe) {
+          var height = getWindowHeight();
+          theIframe.style.height = Math.round(height) - navWidth + "px";
+          theIframe.style.marginTop = Math.round(((height - navWidth) - parseInt(theIframe.style.height)) / 2) + "px";
+        }
+      }
+    }
+
+    function getWindowHeight() {
+      var height = 0;
+      if (window.innerHeight) {
+        height = window.innerHeight - 18;
+      }
+      else if (document.documentElement && document.documentElement.clientHeight) {
+        height = document.documentElement.clientHeight;
+      }
+      else if (document.body && document.body.clientHeight) {
+        height = document.body.clientHeight;
+      }
+      return height;
+    }
+
+    function SetupIFrame() {
+      var navWidth = 40;
+      setIframeHeight("contentFrame", navWidth);
+      window.setTimeout('window.onresize = function() { setIframeHeight("contentFrame", ' + navWidth + '); }', 1000);
+    }
+
+    let pageArray = []
+    async function loadLesssonList() {
+      let pages = ``
+      const get = await fetch('../data/data.json')
+      const data = await get.json()
+      pageArray[0] = { id: data.id, name: 'Course' }
+      pageArray[1] = { id: 'outcomes', name: 'Outcomes' }
+      pageArray[2] = { id: 'rubrics', name: 'Rubrics' }
+      pages += `<button type="button" class="input-btn" onclick="goToPage(0)" >
+                  <img src="./images/home.png" width="24" height="24" alt="home" />
+                  <div>Course</div>
+                </button>`
+      pages += `<button type="button" class="input-btn" onclick="goToPage(1)" >
+                  <img src="./images/target.png" width="24" height="24" alt="tar" />
+                  <div>Outcome</div>
+                </button>`
+      pages += `<button type="button" class="input-btn" onclick="goToPage(2)" >
+                  <img src="./images/table.png" width="24" height="24" alt="rub" />
+                  <div>Rubric</div>
+                </button>`
+      pages += '<hr />'
+      pages += '<div >Lessons</div>'
+      let i = 3
+      for (const part of data.parts) {
+        for (const lesson of part.lessons) {
+          pageArray = [...pageArray, { id: lesson._id, name: lesson.name }]
+          pages += `<input onclick="goToPage(${i})" class="input-btn" type="button" value="${lesson.name}" />`
+          i++
+        }
+      }
+      document.getElementById('pages').innerHTML = pages
+    }
+
+    var currentPage = null
+    var startTimeStamp = null;
+    var processedUnload = false;
+    var reachedEnd = false;
+
+    async function doStart() {
+      await loadLesssonList()
+      SetupIFrame();
+      startTimeStamp = new Date();
+      ScormProcessInitialize();
+      var completionStatus = ScormProcessGetValue("cmi.completion_status", true);
+      if (completionStatus == "unknown") {
+          ScormProcessSetValue("cmi.completion_status", "incomplete");
+      }
+      var bookmark = ScormProcessGetValue("cmi.location", false);
+      if (bookmark == "") {
+          currentPage = 0;
+      }
+      else {
+          if (confirm("Would you like to resume from where you previously left off?")) {
+              currentPage = parseInt(bookmark, 10);
+          }
+          else {
+              currentPage = 0;
+          }
+      }
+      goToPage(0);
+    }
+
+    function goToPage(pageIndex) {
+      const theIframe = document.getElementById("contentFrame");
+      if (pageIndex === 0) {
+        theIframe.src = "../Detail/index.html"
+        window.location.hash = pageArray[pageIndex].id
+      } else if (pageIndex === 1) {
+        theIframe.src = "../Outcome/index.html"
+        window.location.hash = pageArray[pageIndex].id
+      } else if (pageIndex === 2) {
+        theIframe.src = "../Rubric/index.html"
+        window.location.hash = pageArray[pageIndex].id
+      } else {
+        theIframe.src = "../Lesson/Lesson.html"
+        window.location.hash = `${pageArray[0].id}#${pageArray[pageIndex].id}`
+      }
+      ScormProcessSetValue("cmi.location", pageIndex);
+
+      //in this sample course, the course is considered complete when the last page is reached
+      // if (currentPage == (pageArray.length - 1)) {
+      //     reachedEnd = true;
+      //     ScormProcessSetValue("cmi.completion_status", "completed");
+      // }
+    }
+
+    function doUnload(pressedExit) {
+      if (processedUnload == true) { return; }
+      processedUnload = true;
+      var endTimeStamp = new Date();
+      var totalMilliseconds = (endTimeStamp.getTime() - startTimeStamp.getTime());
+      var scormTime = ConvertMilliSecondsIntoSCORM2004Time(totalMilliseconds);
+
+      ScormProcessSetValue("cmi.session_time", scormTime);
+      if (pressedExit == false && reachedEnd == false) {
+        ScormProcessSetValue("cmi.exit", "suspend");
+      }
+
+      ScormProcessTerminate();
+    }
+
+    function doExit() {
+      if (reachedEnd == false && confirm("Would you like to save your progress to resume later?")) {
+        ScormProcessSetValue("cmi.exit", "suspend");
+        ScormProcessSetValue("adl.nav.request", "suspendAll");
+      }
+      else {
+        ScormProcessSetValue("cmi.exit", "");
+        ScormProcessSetValue("adl.nav.request", "exitAll");
+      }
+      doUnload(true);
+
+    }
+    function RecordTest(score) {
+      ScormProcessSetValue("cmi.score.raw", score);
+      ScormProcessSetValue("cmi.score.min", "0");
+      ScormProcessSetValue("cmi.score.max", "100");
+
+      var scaledScore = score / 100;
+      ScormProcessSetValue("cmi.score.scaled", scaledScore);
+
+      //consider 70% to be passing
+      if (score >= 70) {
+        ScormProcessSetValue("cmi.success_status", "passed");
+      }
+      else {
+        ScormProcessSetValue("cmi.success_status", "failed");
+      }
+    }
+
+    //SCORM requires time to be formatted in a specific way
+    function ConvertMilliSecondsIntoSCORM2004Time(intTotalMilliseconds) {
+
+      var ScormTime = "";
+
+      var HundredthsOfASecond;	//decrementing counter - work at the hundreths of a second level because that is all the precision that is required
+
+      var Seconds;	// 100 hundreths of a seconds
+      var Minutes;	// 60 seconds
+      var Hours;		// 60 minutes
+      var Days;		// 24 hours
+      var Months;		// assumed to be an "average" month (figures a leap year every 4 years) = ((365*4) + 1) / 48 days - 30.4375 days per month
+      var Years;		// assumed to be 12 "average" months
+
+      var HUNDREDTHS_PER_SECOND = 100;
+      var HUNDREDTHS_PER_MINUTE = HUNDREDTHS_PER_SECOND * 60;
+      var HUNDREDTHS_PER_HOUR = HUNDREDTHS_PER_MINUTE * 60;
+      var HUNDREDTHS_PER_DAY = HUNDREDTHS_PER_HOUR * 24;
+      var HUNDREDTHS_PER_MONTH = HUNDREDTHS_PER_DAY * (((365 * 4) + 1) / 48);
+      var HUNDREDTHS_PER_YEAR = HUNDREDTHS_PER_MONTH * 12;
+
+      HundredthsOfASecond = Math.floor(intTotalMilliseconds / 10);
+
+      Years = Math.floor(HundredthsOfASecond / HUNDREDTHS_PER_YEAR);
+      HundredthsOfASecond -= (Years * HUNDREDTHS_PER_YEAR);
+
+      Months = Math.floor(HundredthsOfASecond / HUNDREDTHS_PER_MONTH);
+      HundredthsOfASecond -= (Months * HUNDREDTHS_PER_MONTH);
+
+      Days = Math.floor(HundredthsOfASecond / HUNDREDTHS_PER_DAY);
+      HundredthsOfASecond -= (Days * HUNDREDTHS_PER_DAY);
+
+      Hours = Math.floor(HundredthsOfASecond / HUNDREDTHS_PER_HOUR);
+      HundredthsOfASecond -= (Hours * HUNDREDTHS_PER_HOUR);
+
+      Minutes = Math.floor(HundredthsOfASecond / HUNDREDTHS_PER_MINUTE);
+      HundredthsOfASecond -= (Minutes * HUNDREDTHS_PER_MINUTE);
+
+      Seconds = Math.floor(HundredthsOfASecond / HUNDREDTHS_PER_SECOND);
+      HundredthsOfASecond -= (Seconds * HUNDREDTHS_PER_SECOND);
+
+      if (Years > 0) {
+        ScormTime += Years + "Y";
+      }
+      if (Months > 0) {
+        ScormTime += Months + "M";
+      }
+      if (Days > 0) {
+        ScormTime += Days + "D";
+      }
+
+      //check to see if we have any time before adding the "T"
+      if ((HundredthsOfASecond + Seconds + Minutes + Hours) > 0) {
+
+        ScormTime += "T";
+
+        if (Hours > 0) {
+          ScormTime += Hours + "H";
+        }
+
+        if (Minutes > 0) {
+          ScormTime += Minutes + "M";
+        }
+
+        if ((HundredthsOfASecond + Seconds) > 0) {
+          ScormTime += Seconds;
+
+          if (HundredthsOfASecond > 0) {
+            ScormTime += "." + HundredthsOfASecond;
+          }
+
+          ScormTime += "S";
+        }
+
+      }
+
+      if (ScormTime == "") {
+        ScormTime = "0S";
+      }
+
+      ScormTime = "P" + ScormTime;
+
+      return ScormTime;
+    }
+    function test() {
+      alert('as')
+    }
+
+  </script>
+
+</head>
+
+<body onload="doStart()" onbeforeunload="doUnload(false);" onunload="doUnload();">
+  <div class="course">
+    <div class="nav-button" id="pages">
+    </div>
+    <iframe id="contentFrame" class="main-content" src=""></iframe>
+  </div>
+
+</body>
+
+</html>

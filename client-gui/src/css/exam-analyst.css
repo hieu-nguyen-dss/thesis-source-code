@@ -1,0 +1,23 @@
+.containerExamAnalyst {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 10px 20px 10px;
+}
+.exam {
+  display: flex;
+  margin: auto;
+}
+.headerExamAnalyst {
+  display: flex;
+  margin: auto;
+}
+.mainExamAnalyst {
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.add-comment {
+  display: flex;
+  padding: 50px;
+  justify-content: center;
+}
