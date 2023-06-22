@@ -4,7 +4,6 @@ const { partRepo } = require('../repo')
 
 const createPart = async (req, res, next) => {
   const { learningPathId } = req.params
-  console.log(learningPathId)
   const { name } = req.body
   try {
     const createdPart = await partRepo.createPart(learningPathId, name)

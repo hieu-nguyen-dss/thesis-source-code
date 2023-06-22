@@ -44,6 +44,14 @@ const exportLP = (learningPathId, lpName) => {
 
 const deleteLP = (learningPathId) => del(`${BASE}/${learningPathId}`)
 
+const addStudentToCourse = (learningPathId, body) => post(`${BASE}/${learningPathId}/enroll`, body)
+const getStudentInCourse = (learningPathId, name) =>
+  get(`${BASE}/${learningPathId}/enroll?name=${name}`)
+const deleteStudentInCourse = (learningPathId, body) =>
+  del(`${BASE}/${learningPathId}/enroll`, body)
+
+const quizResult = (learningPathId, quizId) => get(`${BASE}/${learningPathId}/quiz/${quizId}`)
+
 export default {
   createLP,
   createOgzLP,
@@ -59,5 +67,9 @@ export default {
   unStarLP,
   exportLP,
   deleteLP,
-  getOgzLPDetail
+  getOgzLPDetail,
+  addStudentToCourse,
+  getStudentInCourse,
+  deleteStudentInCourse,
+  quizResult
 }

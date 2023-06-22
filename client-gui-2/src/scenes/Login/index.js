@@ -1,16 +1,6 @@
 import * as React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import {
-  Button,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Grid,
-  Box,
-  Typography,
-} from "@mui/material";
-import { Helmet } from "react-helmet-async";
-import { useTranslation } from "react-i18next";
+import { Button, TextField, Grid, Box, Typography } from "@mui/material";
 
 import background from "../../assets/images/4783543.png";
 import { userApi } from "../../apis";
@@ -22,7 +12,6 @@ const Login = () => {
   const auth = useAuth();
   const documentTitle = useDocumentTitle();
   const { openSnackbar } = useSnackbar();
-  const { t, i18n } = useTranslation("common");
 
   const from = "/";
 
@@ -127,7 +116,7 @@ const Login = () => {
               required
               fullWidth
               name="password"
-              label={t("login.password")}
+              label="Password"
               type="password"
               id="password"
               autoComplete="current-password"

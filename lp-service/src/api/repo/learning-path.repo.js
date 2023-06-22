@@ -104,7 +104,8 @@ const getMyLPAll = async () => {
         category: 1,
         public: 1,
         stars: 1,
-        youStarred: 1
+        youStarred: 1,
+        participants: 1
       }
     }
   ])
@@ -129,6 +130,7 @@ const getLPDetail = async (id, userGetId) => {
       })
       .populate('rubrics')
       .populate('ownerId', 'avatar email _id name userType')
+      .populate('participants', 'avatar email _id name userType')
       .lean(),
     UserStarLp.findOne({ user: userGetId, learningPath: id })
   ])

@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { firebaseDb } from "../../../firebase/config";
 import styled from "styled-components";
-import { ref, push, update, remove, onValue, set } from "firebase/database";
+import { ref, push, update, remove, onValue, child } from "firebase/database";
+import SectionMenu from "../../../components/SectionMenu";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const AddCard = styled.button`
   position: fixed;
@@ -18,8 +20,8 @@ const Card = styled.div`
   border: 1px solid #bdbdbd;
   padding: 20px;
   position: absolute;
-  min-width: 110px;
-  min-height: 110px;
+  min-width: 200px;
+  min-height: 200px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: white;
   border-radius: 15px;
@@ -29,7 +31,7 @@ const Card = styled.div`
   .DeleteBtn {
     position: absolute;
     top: 8px;
-    right: 8px;
+    right: 5px;
     opacity: 0.5;
     border: none;
     background: transparent;
@@ -79,135 +81,194 @@ const Board = styled.div`
   border: 1px solid #333;
   position: relative;
 `;
-let db = null;
-
+let db1 = null;
+let db2 = null;
 const CORLORS = ["#ffe1b4", "#FFF9D5", "#ECFAF5", "#CBF5E4", "#A5DEC8", "#FFF"];
 
 const NotSharing = () => {
+  const {
+    user: { uid, displayName },
+  } = useContext(AuthContext);
+
   const [items, setItems] = useState(null);
   const [dragging, setDragging] = useState({ key: "", x: 0, y: 0 });
-
+  const [nameCourse, setNameCourse] = useState("");
   const [input, setInput] = useState("");
   const [editMode, setEditMode] = useState({ key: "", w: 0, h: 0 });
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [usersCursor, setUsersCursors] = useState("");
 
   useEffect(() => {
-    let roomName = "room1";
-    db = ref(firebaseDb, roomName);
-    onValue(db, (snapshot) => setItems(snapshot.val()));
+    let searchParams = new URLSearchParams(document.location.search);
+    const roomId = searchParams.get("room");
+    const nameCourse = searchParams.get("name");
+    setNameCourse(nameCourse);
+    let dbParent = ref(firebaseDb, roomId);
+    db1 = child(dbParent, "notes");
+    db2 = child(dbParent, "users");
+    onValue(db1, (snapshot) => setItems(snapshot.val()));
+    onValue(db2, (snapshot) => setUsersCursors(snapshot.val()));
   }, []);
 
   const add = () => {
-    const newPostRef = push(db);
+    const newPostRef = push(db1);
     const newPostKey = newPostRef.key;
-    update(db, {
+    update(db1, {
       [newPostKey]: {
         t: "text here",
         x: window.scrollX + Math.floor(Math.random() * (200 - 80) + 80),
         y: window.scrollY + Math.floor(Math.random() * (200 - 80) + 80),
         c: 5,
+        author: displayName,
+      },
+    });
+  };
+
+  const addUser = () => {
+    const newPostRef = push(db2);
+    const newPostKey = newPostRef.key;
+    update(db2, {
+      [newPostKey]: {
+        x: window.scrollX,
+        y: window.scrollY,
+        author: displayName,
+        uid,
       },
     });
   };
 
   const updateItem = (key, item) => {
-    console.log("key: ", `room1/${key}`);
-    const db = null;
-    const itemRef = ref(db, `room1/${key}`);
-    console.log("firebaseDb: ", itemRef);
-    update(itemRef, item);
+    const childRef = child(db1, key);
+    update(childRef, item);
   };
+
+  const updateUser = (userId, item) => {
+    const childRef = child(db2, userId);
+    update(childRef, item);
+  };
+
   const removeItem = (key) => {
-    const itemRef = ref(db, `/${key}`);
-    remove(itemRef);
+    const childRef = child(db1, key);
+    remove(childRef);
   };
 
-  if (!items)
-    return (
-      <button className="AddCard" onClick={() => add()}>
-        ＋ add card
-      </button>
-    );
+  const handleMouseMove = (event) => {};
 
+  window.addEventListener("mousemove", handleMouseMove);
   return (
-    <Board
-      onDragOver={(e) => e.preventDefault()}
-      onDrop={(e) => {
-        if (!dragging || !items) return;
-        updateItem(dragging.key, {
-          ...items[dragging.key],
-          x: e.clientX - dragging.x,
-          y: e.clientY - dragging.y,
-        });
-      }}
-    >
-      <AddCard className="AddCard" onClick={() => add()}>
-        ＋ add card
-      </AddCard>
-      <div>
-        {Object.keys(items).map((key) => (
-          <Card
-            key={key}
+    <>
+      <SectionMenu menuCurrent={`Course / ${nameCourse}`} />
+      <Board
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => {
+          if (!dragging || !items) return;
+          updateItem(dragging.key, {
+            ...items[dragging.key],
+            x: e.clientX - dragging.x,
+            y: e.clientY - dragging.y,
+          });
+        }}
+        style={{
+          border: "none",
+        }}
+      >
+        <AddCard className="AddCard" onClick={() => add()}>
+          ＋ add card
+        </AddCard>
+        <div>
+          {items &&
+            Object.keys(items).map((key) => (
+              <Card
+                key={key}
+                style={{
+                  left: items[key].x + "px",
+                  top: items[key].y + "px",
+                  background: CORLORS[items[key].c],
+                }}
+                draggable
+                onDragStart={(e) => {
+                  setDragging({
+                    key,
+                    x: e.clientX - items[key].x,
+                    y: e.clientY - items[key].y,
+                  });
+                }}
+              >
+                <button className="DeleteBtn" onClick={() => removeItem(key)}>
+                  ×
+                </button>
+                <div className="ColorSelector">
+                  {CORLORS.map((c, i) => (
+                    <div
+                      key={c}
+                      className="ColorCircle"
+                      onClick={() => {
+                        updateItem(key, { ...items[key], c: i });
+                      }}
+                      style={{ background: c }}
+                    />
+                  ))}
+                </div>
+                {editMode.key === key ? (
+                  <textarea
+                    className="EditableText"
+                    style={{ width: editMode.w, height: editMode.h }}
+                    onChange={(e) => setInput(e.target.value)}
+                    defaultValue={items[key].t}
+                    autoFocus
+                    onFocus={(e) => e.target.select()}
+                    onBlur={() => {
+                      setInput("");
+                      setEditMode({ key: "", w: 0, h: 0 });
+                      input && updateItem(key, { ...items[key], t: input });
+                    }}
+                  />
+                ) : (
+                  <pre
+                    className="Text"
+                    onClick={(e) =>
+                      setEditMode({
+                        key,
+                        w: e.currentTarget.clientWidth,
+                        h: e.currentTarget.clientHeight,
+                      })
+                    }
+                  >
+                    {items[key].t}
+                  </pre>
+                )}
+                <p
+                  style={{
+                    textAlign: "center",
+                    position: "absolute",
+                    bottom: 0,
+                    marginBottom: 0,
+                    width: "100%",
+                    left: 0,
+                    color: "gray",
+                    fontSize: "12px",
+                  }}
+                >
+                  {items[key].author}
+                </p>
+              </Card>
+            ))}
+          <div
             style={{
-              left: items[key].x + "px",
-              top: items[key].y + "px",
-              background: CORLORS[items[key].c],
-            }}
-            draggable
-            onDragStart={(e) => {
-              setDragging({
-                key,
-                x: e.clientX - items[key].x,
-                y: e.clientY - items[key].y,
-              });
+              position: "fixed",
+              left: cursorPosition.x,
+              top: cursorPosition.y,
+              fontStyle: "italic",
+              color: "#F99B7D",
             }}
           >
-            <button className="DeleteBtn" onClick={() => removeItem(key)}>
-              ×
-            </button>
-            <div className="ColorSelector">
-              {CORLORS.map((c, i) => (
-                <div
-                  key={c}
-                  className="ColorCircle"
-                  onClick={() => {
-                    updateItem(key, { ...items[key], c: i });
-                  }}
-                  style={{ background: c }}
-                />
-              ))}
-            </div>
-            {editMode.key === key ? (
-              <textarea
-                className="EditableText"
-                style={{ width: editMode.w, height: editMode.h }}
-                onChange={(e) => setInput(e.target.value)}
-                defaultValue={items[key].t}
-                autoFocus
-                onFocus={(e) => e.target.select()}
-                onBlur={() => {
-                  setInput("");
-                  setEditMode({ key: "", w: 0, h: 0 });
-                  input && updateItem(key, { ...items[key], t: input });
-                }}
-              />
-            ) : (
-              <pre
-                className="Text"
-                onClick={(e) =>
-                  setEditMode({
-                    key,
-                    w: e.currentTarget.clientWidth,
-                    h: e.currentTarget.clientHeight,
-                  })
-                }
-              >
-                {items[key].t}
-              </pre>
-            )}
-          </Card>
-        ))}
-      </div>
-    </Board>
+            <span role="img" aria-label="cursor">
+              {displayName}
+            </span>
+          </div>
+        </div>
+      </Board>
+    </>
   );
 };
 

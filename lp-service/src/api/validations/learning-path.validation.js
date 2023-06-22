@@ -30,7 +30,11 @@ const createLearningPath = {
     name: Joi.string().required(),
     category: Joi.string().required(),
     description: Joi.string().empty(),
-    ownerType: Joi.string().required()
+    ownerType: Joi.string().required(),
+    semaster: Joi.string().empty(),
+    startDate: Joi.string().empty(),
+    endDate: Joi.string().empty(),
+    participants: Joi.array().required()
   })
 }
 
@@ -56,7 +60,8 @@ const updateLearningPath = {
 
 const cloneLearningPath = {
   params: Joi.object({
-    learningPathId: Joi.string().required()
+    learningPathId: Joi.string().required(),
+    name: Joi.string()
   })
 }
 

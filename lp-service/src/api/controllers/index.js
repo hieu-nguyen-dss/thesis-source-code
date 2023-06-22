@@ -18,6 +18,9 @@ const questionController = require('./question.controller')
 const examController = require('./exam.controller')
 const keyController = require('./key.controller')
 const examAnalystController = require('./exam-analyst.controller')
+const studentController = require('./student.controller')
+const participantController = require('./participant.controller')
+
 module.exports = {
   userController,
   organizationController,
@@ -38,5 +41,7 @@ module.exports = {
   questionController,
   examController,
   keyController,
-  examAnalystController
+  examAnalystController,
+  studentController,
+  participantController
 }

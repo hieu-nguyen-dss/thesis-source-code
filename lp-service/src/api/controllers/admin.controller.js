@@ -11,7 +11,6 @@ const login = async (req, res, next) => {
       authConfig: { secretKey }
     } = req
     const user = await adminRepo.getUserByeEmail(email)
-    console.log('user: ', user)
     if (user) {
       const matchPassword = passwordUtils.comparePassword(password, user.password)
       if (matchPassword) {

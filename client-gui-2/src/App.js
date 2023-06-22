@@ -18,13 +18,15 @@ function App() {
       }
     });
   }, []);
+
   return (
     <HelmetProvider>
       <DocumentTitleProvider>
         <AuthProvider>
           <SnackbarProvider>
             <div style={{ backgroundColor: "white", height: "100vh" }}>
-              <Header />
+              {window.location.pathname !== "/login" &&
+                window.location.pathname !== "/signup" && <Header />}
               <Router />
             </div>
           </SnackbarProvider>

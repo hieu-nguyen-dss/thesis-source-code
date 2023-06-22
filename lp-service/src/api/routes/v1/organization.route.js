@@ -16,7 +16,6 @@ router
   .route('/:ogzId')
   .post(verifyToken, validation.createLearningPathValidate, controller.createLearningPath)
   .put(verifyToken, validation.updateOrganizationValidate, controller.editOrganization)
-  .delete(verifyToken, validation.deleteOrganizationValidate, controller.deleteOrganization)
   .get(verifyToken, validation.getOrganizationValidate, controller.getOrganization)
 
 router
@@ -33,6 +32,8 @@ router
   .route('/members/accept')
   .get(validation.acceptInviteValidate, verifyTokenQuery, controller.acceptInvite)
 
-router.route('/:ogzId/members/role').put(verifyToken, validation.editRoleValidate, controller.editRole)
+router
+  .route('/:ogzId/members/role')
+  .put(verifyToken, validation.editRoleValidate, controller.editRole)
 
 module.exports = router

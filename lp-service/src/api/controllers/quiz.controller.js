@@ -17,6 +17,34 @@ const getQuizz = async (req, res, next) => {
   }
 }
 
+const getQuestion = async (req, res, next) => {
+  const { query } = req
+  try {
+    const question = await Question.findById(query.questionId)
+    return res.status(httpStatus.OK).json(getApiResponse({ data: { question } }))
+  } catch (error) {
+    next(error)
+  }
+}
+
+const updateQuestion = async (req, res, next) => {
+  const { query, body } = req
+  try {
+    const question = await Question.findByIdAndUpdate(query.questionId, {
+      questions: body.question,
+      choices: body.choices,
+      answer: body.answer
+    })
+
+    await Quizzes.findByIdAndUpdate(query.quizId, {
+      updatedAt: Date.now()
+    })
+    return res.status(httpStatus.OK).json(getApiResponse({ data: { question } }))
+  } catch (error) {
+    next(error)
+  }
+}
+
 /** insert all questinos */
 const insertQuestions = async (req, res, next) => {
   const { params, body } = req
@@ -81,26 +109,29 @@ const insertQuestions = async (req, res, next) => {
 }
 
 /** Delete all Questions */
-// export async function dropQuestions(req, res){
-//    try {
-//         await Questions.deleteMany();
-//         res.json({ msg: "Questions Deleted Successfully...!"});
-//    } catch (error) {
-//         res.json({ error })
-//    }
-// }
+const deleteQuestion = async (req, res) => {
+  const { query } = req
+  try {
+    const quiz = await Quizzes.findById(query.quizId)
+    const questionsUpdate = quiz.questions.filter((q) => q.toString() !== query.questionId)
+    await Quizzes.findByIdAndUpdate(query.quizId, {
+      questions: questionsUpdate
+    })
+    await Question.findByIdAndDelete(query.questionId)
+    return res.status(httpStatus.OK).json(getApiResponse({ msg: 'Delete successfully' }))
+  } catch (error) {
+    res.json({ error })
+  }
+}
 
-/** get all result */
-// export async function getResult(req, res){
-//     try {
-//         const r = await Results.find();
-//         res.json(r)
-//     } catch (error) {
-//         res.json({ error })
-//     }
-// }
+function roundDecimal(number) {
+  const roundedNumber = Math.round(number)
+  if (number % 1 === 0.5) {
+    return Math.ceil(number)
+  }
+  return roundedNumber
+}
 
-/** post all result */
 const storeResult = async (req, res) => {
   const { params } = req
   try {
@@ -122,7 +153,7 @@ const storeResult = async (req, res) => {
       achive = true
     }
 
-    score = (count / questions.length) * 10
+    score = roundDecimal((count / questions.length) * 10)
     const result = new ResultQuizzes({
       id: nanoid(10),
       studentId: params.studentId,
@@ -176,5 +207,8 @@ module.exports = {
   insertQuestions,
   getQuizz,
   storeResult,
-  getAnswer
+  getAnswer,
+  deleteQuestion,
+  getQuestion,
+  updateQuestion
 }

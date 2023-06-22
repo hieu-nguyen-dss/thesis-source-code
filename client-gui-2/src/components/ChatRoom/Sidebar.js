@@ -1,16 +1,16 @@
 import React from "react";
 import { Row, Col } from "antd";
 import UserInfo from "./UserInfo";
-import RoomList from "./RoomList";
+import OperationList from "./OperationList";
 import styled from "styled-components";
 
 const SidebarStyled = styled.div`
   background: #eaded7;
   color: black;
-  height: 100vh;
+  height: 85vh;
 `;
 
-export default function Sidebar() {
+export default function Sidebar({ name, id }) {
   return (
     <SidebarStyled>
       <Row>
@@ -18,7 +18,7 @@ export default function Sidebar() {
           <UserInfo />
         </Col>
         <Col span={24}>
-          <RoomList />
+          <OperationList name={name} id={id} />
         </Col>
       </Row>
     </SidebarStyled>

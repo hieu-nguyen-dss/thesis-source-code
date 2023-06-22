@@ -2,8 +2,9 @@ const httpStatus = require('http-status')
 const fs = require('fs')
 const path = require('path')
 const archiver = require('archiver')
-
 const getApiResponse = require('../utils/response')
+const { ResultQuizzes } = require('../models')
+
 const { learningPathRepo, editPermissionRepo, organizationRepo } = require('../repo')
 
 const searchLearningPath = async (req, res, next) => {
@@ -38,9 +39,13 @@ const getMyLPs = async (req, res, next) => {
 }
 
 const getMyLPsAll = async (req, res, next) => {
+  const { userId } = req.query
   try {
-    const myLPs = await learningPathRepo.getMyLPAll()
-    return res.status(httpStatus.OK).json(getApiResponse({ data: myLPs }))
+    const myLPs = await learningPathRepo.getMyLPAll(userId)
+    const filterMyLPs = myLPs.filter((l) =>
+      l.participants.map((id) => id.toString()).includes(userId)
+    )
+    return res.status(httpStatus.OK).json(getApiResponse({ data: filterMyLPs }))
   } catch (error) {
     next(error)
   }
@@ -218,11 +223,20 @@ const exportCourse = async (req, res, next) => {
       { encoding: 'utf8' }
     )
 
-    // zip
     const archive = archiver('zip')
     archive.directory(scormPath, false)
     archive.pipe(res)
     archive.finalize()
+  } catch (error) {
+    next(error)
+  }
+}
+
+const getQuizResult = async (req, res, next) => {
+  const { quizId } = req.params
+  try {
+    const results = await ResultQuizzes.find({ quizId })
+    return res.status(httpStatus.OK).json(getApiResponse({ data: results }))
   } catch (error) {
     next(error)
   }
@@ -244,5 +258,6 @@ module.exports = {
   starLP,
   unStarLP,
   getCourseData,
-  exportCourse
+  exportCourse,
+  getQuizResult
 }

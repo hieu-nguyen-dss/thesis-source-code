@@ -23,7 +23,8 @@ const ExamManagement = lazy(() => import('./ExamManagement'))
 const AddQuestion = lazy(() => import('./QuestionManagement/add-question/AddQuestion'))
 const QuestionDetail = lazy(() => import('./QuestionManagement/question-detail'))
 const ExamDetail = lazy(() => import('./ExamManagement/exam-detail/ExamDetailWrapper'))
-
+const StudentManagement = lazy(() => import('./DetailLP/StudentManagement'))
+const QuizManagement = lazy(() => import('./DetailLP/QuizManagement'))
 const publicRoutes = [
   {
     path: '/login',
@@ -113,6 +114,26 @@ const privateRoutes = [
     component: DetailLP
   },
   {
+    path: '/my-lps/courses/:id/student-management',
+    public: false,
+    component: StudentManagement
+  },
+  {
+    path: '/my-lps/courses/:id/quiz-management',
+    public: false,
+    component: QuizManagement
+  },
+  {
+    path: '/organizations/:ogzId/courses/:id/student-management',
+    public: false,
+    component: StudentManagement
+  },
+  {
+    path: '/organizations/:ogzId/courses/:id/quiz-management',
+    public: false,
+    component: QuizManagement
+  },
+  {
     path: '/my-lps/courses/:id/outcomes',
     public: false,
     component: Outcomes
@@ -141,6 +162,11 @@ const privateRoutes = [
     path: '/organizations/:ogzId/courses/:id/:lesson',
     public: false,
     component: Lesson
+  },
+  {
+    path: 'organizations/:ogzId/courses/:id/:lesson/quizzes',
+    public: false,
+    component: Quizzes
   },
   {
     path: '/my-lps/courses/:id/:lesson/quizzes',

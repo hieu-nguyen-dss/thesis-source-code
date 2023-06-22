@@ -1,5 +1,4 @@
-import { UncontrolledTreeEnvironment, Tree, StaticTreeDataProvider } from 'react-complex-tree'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import 'react-complex-tree/lib/style-modern.css'
 import {
   List,
@@ -7,34 +6,67 @@ import {
   ListItemText,
   Collapse,
   Typography,
-  Button,
   IconButton,
   Box,
-  TextField,
-  ListItem,
-  Popover
+  ListItem
 } from '@mui/material'
-import LoadingButton from '@mui/lab/LoadingButton'
 import {
   ExpandLess,
   ExpandMore,
   Add as AddIcon,
   Check,
-  Close,
   SubdirectoryArrowRight,
   Delete
 } from '@mui/icons-material'
 import { useSnackbar } from '../../contexts'
 import { quizApi } from '../../apis'
 import { HTTP_STATUS, SNACKBAR } from '../../constants'
-import { useNavigate, useLocation, useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
-const TableQuizzes = ({ data }) => {
-  const questions = data?.map(d => d.questions) ?? []
+const TableQuizzes = ({ data, setLoading }) => {
+  const questions =
+    data?.questions?.map((d) => {
+      return {
+        id: d._id,
+        description: d.questions
+      }
+    }) ?? []
+
   const [opens, setOpens] = React.useState(null)
-  const [submitting, setSubmiting] = React.useState(false)
   const { openSnackbar } = useSnackbar()
-  const { id: learningPathId, lesson: lessonId } = useParams()
+  const navigate = useNavigate()
+
+  const handleOpen = (index) => {
+    const copyOpen = Array.from(opens)
+    copyOpen[index] = !copyOpen[index]
+    setOpens(copyOpen)
+  }
+
+  const handleDeleteQuestion = async (questionId) => {
+    setLoading(false)
+    try {
+      const { status } = await quizApi.deleteQuestion(data._id, questionId)
+      if (status === HTTP_STATUS.OK) {
+        openSnackbar(SNACKBAR.SUCCESS, 'Delete successfully')
+        setLoading(true)
+      } else {
+        openSnackbar(SNACKBAR.WARNING, 'Delete failed')
+        setLoading(true)
+      }
+    } catch (error) {
+      openSnackbar(SNACKBAR.ERROR, 'Try again')
+      setLoading(true)
+    }
+  }
+
+  const handleEditQuestion = (questionId) => {
+    navigate(`${window.location.pathname}/quizzes`, {
+      state: {
+        questionId,
+        quizId: data._id
+      }
+    })
+  }
 
   useEffect(() => {
     if (questions && questions.length) {
@@ -47,16 +79,12 @@ const TableQuizzes = ({ data }) => {
       padding: 0px;
     }
   `
-  const handleOpen = (index) => {
-    const copyOpen = Array.from(opens)
-    copyOpen[index] = !copyOpen[index]
-    setOpens(copyOpen)
-  }
 
   return (
     <React.Fragment>
       <List>
-        {data && data.map((q, index) => (
+        {data &&
+          data?.questions?.map((q, index) => (
             <React.Fragment key={index}>
               <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <ListItemButton sx={{ flexGrow: 1 }} onClick={() => handleOpen(index)}>
@@ -67,29 +95,28 @@ const TableQuizzes = ({ data }) => {
                       }`}</Typography>
                     }
                   />
-                 {opens && opens[index] ? <ExpandLess /> : <ExpandMore />}
+                  {opens && opens[index] ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <React.Fragment>
-                    <IconButton
-                      onClick={() => {}}
-                      sx={{
-                        color: '#6c68f3'
-                      }}
-                      size="small">
-                      <SubdirectoryArrowRight />
-                    </IconButton>
-                    <IconButton
-                      onClick={(e) => {}}
-                      sx={{
-                        color: '#6c68f3'
-                      }}
-                      size="small">
-                      <Delete />
-                    </IconButton>
-                  </React.Fragment>
+                  <IconButton
+                    onClick={() => handleEditQuestion(q._id)}
+                    sx={{
+                      color: '#6c68f3'
+                    }}
+                    size="small">
+                    <SubdirectoryArrowRight />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => handleDeleteQuestion(q._id)}
+                    sx={{
+                      color: '#6c68f3'
+                    }}
+                    size="small">
+                    <Delete />
+                  </IconButton>
+                </React.Fragment>
               </Box>
               <Collapse in={opens && opens[index]} timeout="auto" unmountOnExit>
-                {console.log('answer: ', q.answer)}
                 <List disablePadding>
                   {q &&
                     q.choices.map((choice, idx) => (
@@ -99,27 +126,30 @@ const TableQuizzes = ({ data }) => {
                             primary={
                               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <Typography>
-                                  { q.answer === choice.key && <Check sx={{ width: 14, height: 14, color: 'green', marginRight: '10px' }} /> }
+                                  {q.answer === choice.key && (
+                                    <Check
+                                      sx={{
+                                        width: 14,
+                                        height: 14,
+                                        color: 'green',
+                                        marginRight: '10px'
+                                      }}
+                                    />
+                                  )}
                                   <span>{`${choice.value}`}</span>
-                                  </Typography>
+                                </Typography>
                               </Box>
                             }
                           />
                         </ListItemButton>
-                        <IconButton
-                          onClick={(e) => {}}
-                          size="small"
-                          sx={{ color: '#6c68f3' }}>
-                          <Delete />
-                        </IconButton>
                       </ListItem>
                     ))}
                 </List>
               </Collapse>
             </React.Fragment>
-        ))}
+          ))}
       </List>
-      <style type='text/css'>{overwriteCss}</style>
+      <style type="text/css">{overwriteCss}</style>
     </React.Fragment>
   )
 }

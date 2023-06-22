@@ -4,7 +4,7 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import ShareIcon from '@mui/icons-material/Share'
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined'
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import Description from './Description'
@@ -23,6 +23,7 @@ import notFoundBg from '../../assets/flaticon/404.png'
 
 const DetailLP = (props) => {
   const [detail, setDetail] = React.useState(null)
+  const [lessons, setLessons] = React.useState(null)
   const [settingData, setSettingData] = React.useState(null)
   const params = useParams()
   const { pathname } = useLocation()
@@ -33,7 +34,7 @@ const DetailLP = (props) => {
   const [notFound, setNotFound] = React.useState(false)
   const { t } = useTranslation('common')
   const ogzMode = pathname.includes('organizations')
-
+  const navigate = useNavigate()
   const getLPDetail = async () => {
     let get
     if (ogzMode) {
@@ -104,6 +105,40 @@ const DetailLP = (props) => {
           }}>
           <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', mb: 5 }}>
             <Name editable={detail ? detail.yours : false} name={detail ? detail.name : ''} />
+            <Button
+              onClick={() => {
+                navigate(`${window.location.pathname}/student-management`)
+              }}
+              size="small"
+              sx={{
+                mr: 1,
+                color: '#6c68f3',
+                background: 'white',
+                border: '2px solid #6c68f3',
+                textTransform: 'none'
+              }}
+              endIcon={<ExitToAppOutlinedIcon />}>
+              {t('learningPath.studentManagement')}
+            </Button>
+            <Button
+              onClick={() => {
+                navigate(`${window.location.pathname}/quiz-management`, {
+                  state: {
+                    lessons
+                  }
+                })
+              }}
+              size="small"
+              sx={{
+                mr: 1,
+                color: '#6c68f3',
+                background: 'white',
+                border: '2px solid #6c68f3',
+                textTransform: 'none'
+              }}
+              endIcon={<ExitToAppOutlinedIcon />}>
+              Quizzes
+            </Button>
             <Box>
               <Button
                 onClick={handleExport}
@@ -185,6 +220,8 @@ const DetailLP = (props) => {
               <Paper variant="outlined" sx={{ m: 2, mb: 0, p: 2, borderRadius: 3, border: 'none' }}>
                 {detail && detail.parts && (
                   <TableContent
+                    lessons={lessons}
+                    setLessons={setLessons}
                     allParts={detail.parts}
                     editable={detail.yours || detail.editable}
                   />
@@ -211,8 +248,7 @@ const DetailLP = (props) => {
             backgroundSize: 'cover 5%',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center'
-          }}>
-        </Box>
+          }}></Box>
       )}
     </React.Fragment>
   )

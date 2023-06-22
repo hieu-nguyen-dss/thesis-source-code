@@ -19,7 +19,6 @@ const CourseList = (props) => {
       sx={{
         background: "white",
         borderRadius: 3,
-        p: 2,
         mt: 2,
         display: "flex",
         alignItems: "flex-start",
@@ -38,7 +37,7 @@ const CourseList = (props) => {
           {courses &&
             courses.map((item, index) => {
               return (
-                <Grid item xs={1} sm={1} md={4} key={index}>
+                <Grid item xs={4} sm={4} md={4} key={index}>
                   <Box
                     sx={{
                       position: "relative",

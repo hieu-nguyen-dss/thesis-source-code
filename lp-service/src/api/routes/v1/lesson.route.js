@@ -10,7 +10,8 @@ router
   .route('/:learningPathId/:lessonId')
   .get(verifyToken, validation.getLessonValidate, controller.getLesson)
 
-router.route('/:ogzId/:learningPathId/:lessonId')
+router
+  .route('/:ogzId/:learningPathId/:lessonId')
   .get(verifyToken, validation.getOgzLessonValidate, controller.getOgzLesson)
 
 router.route('/:partId').post(verifyToken, validation.createLessonValidate, controller.createLesson)

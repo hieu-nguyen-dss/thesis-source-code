@@ -162,7 +162,11 @@ const Member = ({ data, youAreAdmin, setYouAreAdmin, removeMember: updateMemberL
               </Tooltip>
               {!you && (
                 <Tooltip title={t('organization.members.remove')}>
-                  <IconButton onClick={() => setRemoveDialog(true)} color="error" size="small" sx={{ mr: 2 }}>
+                  <IconButton
+                    onClick={() => setRemoveDialog(true)}
+                    color="error"
+                    size="small"
+                    sx={{ mr: 2 }}>
                     <CancelRoundedIcon />
                   </IconButton>
                 </Tooltip>
@@ -187,9 +191,7 @@ const Member = ({ data, youAreAdmin, setYouAreAdmin, removeMember: updateMemberL
         onClose={() => setOpenAdminDialog(false)}>
         <DialogTitle>{t('organization.members.addAsAdmin')}</DialogTitle>
         <DialogContent>
-          <Box>
-          {t('organization.members.addAsAdminNote')}
-          </Box>
+          <Box>{t('organization.members.addAsAdminNote')}</Box>
         </DialogContent>
         <DialogActions>
           <Button

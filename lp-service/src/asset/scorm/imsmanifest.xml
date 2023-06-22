@@ -28,9 +28,9 @@ intra-SCO navigation.
   </metadata>
   <organizations default="golf_sample_default_org">
     <organization identifier="golf_sample_default_org" adlseq:objectivesGlobalToSystem="false">
-      <title>Hóa học lớp 11</title>
+      <title>Đại số tuyến tính</title>
       <item identifier="item_1" identifierref="resource_1">
-        <title>Hóa học lớp 11</title>
+        <title>Đại số tuyến tính</title>
         <!-- Include some basic sequencing information that overrides the defaults-->
         <imsss:sequencing>
           <imsss:deliveryControls completionSetByContent="true" objectiveSetByContent="true"/>

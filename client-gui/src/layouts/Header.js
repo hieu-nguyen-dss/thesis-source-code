@@ -158,9 +158,11 @@ const Header = (props) => {
                 </Button>
               ))}
             </Box>
-            <Box sx={{ mr: 2 }} >
-              <IconButton onClick={e => setAnchorElNotif(e.currentTarget)} sx={{ color: '#6c68f3' }} >
-                <Badge badgeContent={5} max={99} color='info' >
+            <Box sx={{ mr: 2 }}>
+              <IconButton
+                onClick={(e) => setAnchorElNotif(e.currentTarget)}
+                sx={{ color: '#6c68f3' }}>
+                <Badge badgeContent={5} max={99} color="info">
                   <NotificationsActiveTwoToneIcon />
                 </Badge>
               </IconButton>
@@ -228,13 +230,17 @@ const Header = (props) => {
                   </Link>
                 </MenuItem>
                 <MenuItem key={'setting'} onClick={handleCloseUserMenu}>
-                  <ListItemIcon><Settings fontSize='small' /></ListItemIcon>
+                  <ListItemIcon>
+                    <Settings fontSize="small" />
+                  </ListItemIcon>
                   <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/settings">
                     <Typography textAlign="center">{t('pages.settings.menu')}</Typography>
                   </Link>
                 </MenuItem>
                 <MenuItem key={'logout'} onClick={handleLogut}>
-                  <ListItemIcon><Logout fontSize='small' /></ListItemIcon>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
                   <Typography textAlign="center">{t('auth.logout')}</Typography>
                 </MenuItem>
               </Menu>

@@ -12,6 +12,10 @@ const login = async (req, res, next) => {
     } = req
     const user = await userRepo.getUserByeEmail(email)
     if (user) {
+      if (user.userType === 'STUDENT')
+        return res
+          .status(httpStatus.UNAUTHORIZED)
+          .json(getApiResponse({ data: { msg: 'User do not have permission to access' } }))
       const matchPassword = passwordUtils.comparePassword(password, user.password)
       if (matchPassword) {
         const payload = {
@@ -40,7 +44,8 @@ const signup = async (req, res, next) => {
     const {
       authConfig: { secretKey }
     } = req
-    const { email, password, name, userType } = req.body
+    const { email, password, name, userType, organization } = req.body
+    console.log('organization: ', organization)
     const user = await userRepo.getUserByeEmail(email)
     if (user) {
       return res.status(httpStatus.BAD_REQUEST).json(getApiResponse({ msg: 'Exist' }))
@@ -85,9 +90,7 @@ const getListUser = async (req, res, next) => {
   const { userType } = req.query
   try {
     const users = await userRepo.getListUser(userType)
-    return res
-      .status(httpStatus.OK)
-      .json(getApiResponse({ data: users }))
+    return res.status(httpStatus.OK).json(getApiResponse({ data: users }))
   } catch (error) {
     next(error)
   }
@@ -95,12 +98,10 @@ const getListUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   const { id } = req.query
-  const ids = id.split(',');
+  const ids = id.split(',')
   try {
     const users = await userRepo.deleteUser(ids)
-    return res
-      .status(httpStatus.OK)
-      .json(getApiResponse({ data: users }))
+    return res.status(httpStatus.OK).json(getApiResponse({ data: users }))
   } catch (error) {
     next(error)
   }

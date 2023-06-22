@@ -114,7 +114,11 @@ const Filter = ({ filter, countCate }) => {
         <Button
           onClick={deleteFilter}
           color="warning"
-          sx={{ textTransform: 'none', '&.MuiButton-root': { justifyContent: 'left' }, fontSize: 13 }}>
+          sx={{
+            textTransform: 'none',
+            '&.MuiButton-root': { justifyContent: 'left' },
+            fontSize: 13
+          }}>
           {t('categories.deleteFilter')}
         </Button>
       </Box>

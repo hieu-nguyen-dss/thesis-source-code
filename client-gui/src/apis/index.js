@@ -12,7 +12,7 @@ import roadmapApi from './roadmap'
 import notifApi from './notif'
 import analysisApi from './analysis'
 import quizApi from './quiz'
-
+import stuApi from './studentManagement'
 export {
   userApi,
   lpApi,
@@ -27,5 +27,6 @@ export {
   roadmapApi,
   notifApi,
   analysisApi,
-  quizApi
+  quizApi,
+  stuApi
 }

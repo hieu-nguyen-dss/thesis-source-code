@@ -23,9 +23,10 @@ const uploadFile = async (req, res, next) => {
     const mvFiles = Object.entries(req.files).map(([name, file], index) =>
       file.mv(`${uploadFolder}/${prefixes[index]}-${file.name}`)
     )
-    const resData = Object.entries(req.files).map(([name, file], index) =>
-      ({ name: `${prefixes[index]}-${file.name}`, type: file.mimetype })
-    )
+    const resData = Object.entries(req.files).map(([name, file], index) => ({
+      name: `${prefixes[index]}-${file.name}`,
+      type: file.mimetype
+    }))
     const addLinkToLesson = lessonRepo.updateLesson(lessonId, {
       $addToSet: {
         resources: {
@@ -100,9 +101,10 @@ const uploadFileRoadmap = async (req, res, next) => {
     const mvFiles = Object.entries(req.files).map(([name, file], index) =>
       file.mv(`${uploadFolder}/${prefixes[index]}-${file.name}`)
     )
-    const resData = Object.entries(req.files).map(([name, file], index) =>
-      ({ name: `${prefixes[index]}-${file.name}`, type: file.mimetype })
-    )
+    const resData = Object.entries(req.files).map(([name, file], index) => ({
+      name: `${prefixes[index]}-${file.name}`,
+      type: file.mimetype
+    }))
     const addLinkToRoadmapStep = roadmapRepo.updateStep(roadmapStepId, {
       $addToSet: {
         resources: {

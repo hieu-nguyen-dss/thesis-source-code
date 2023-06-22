@@ -29,3 +29,7 @@ body {
 /* body {
   background-color: #f5f7ff !important;
 } */
+
+.ant-picker-dropdown {
+  z-index: 10000;
+}

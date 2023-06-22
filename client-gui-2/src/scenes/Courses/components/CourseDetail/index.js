@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SectionMenu from "../../../../components/SectionMenu";
 import { useAuth, useSnackbar } from "../../../../contexts";
-import { Collapse } from "antd";
-import { Tabs } from "antd";
+import { Collapse, Tabs, Col, Row } from "antd";
 import styled from "styled-components";
 import lpApi from "../../../../apis/courses";
 import { saveAs } from "file-saver";
@@ -10,7 +9,9 @@ import { HTTP_STATUS, SNACKBAR } from "../../../../constants";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import vars from "../../../../config/vars";
 import Quiz from "./Quiz";
-import GroupActivity from "./GroupActivity";
+import GroupActivityList from "./GroupActivityList";
+import MainInfo from "./MainInfo";
+import PopupVideo from "./PopupVideo";
 
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -20,15 +21,36 @@ const Container = styled.section`
   width: 95%;
   margin: 0 auto;
   height: 100vh;
+
+  .ant-collapse-header {
+    background-color: #eaded7;
+    font-weight: bold;
+    border-radius: 0px !important;
+  }
+  .ant-collapse-content-box {
+  }
+  .material {
+    &:hover {
+      background-color: whitesmoke;
+    }
+  }
+  .ant-tabs-tab-btn {
+    font-weight: bold;
+  }
 `;
+
 const Content = styled.div`
   display: flex;
-  justify-content: flex-start,
-  align-items: center
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 5px;
+  cursor: pointer;
 `;
+
 const CourseDetail = () => {
   let { id } = useParams();
   const auth = useAuth();
+  const [modal, setModal] = useState(false);
   const [course, setCourse] = useState({});
   const [lessons, setLessons] = useState([]);
   const [answer, setAnswer] = useState([]);
@@ -109,7 +131,7 @@ const CourseDetail = () => {
 
   const onChangeTabs = (activeKey) => {
     if (activeKey === "1") {
-      const queryParams = new URLSearchParams(location.search);
+      const queryParams = new URLSearchParams("");
       queryParams.set("tab", "lesson");
       const newSearch = queryParams.toString();
       navigate({
@@ -118,7 +140,7 @@ const CourseDetail = () => {
       });
     }
     if (activeKey === "2") {
-      const queryParams = new URLSearchParams(location.search);
+      const queryParams = new URLSearchParams("");
       queryParams.set("tab", "group-chat-room");
       const newSearch = queryParams.toString();
       navigate({
@@ -130,7 +152,6 @@ const CourseDetail = () => {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    console.log("queryParams: ", queryParams.get("tab"));
     if (queryParams.get("tab") === "group-chat-room") {
       setActiveTab("2");
     }
@@ -140,21 +161,45 @@ const CourseDetail = () => {
     setLoading(true);
   }, [activeTab, loading, location.search]);
 
+  const renderIconMaterial = (applicationType) => {
+    switch (applicationType) {
+      case "application/pdf":
+        return "../assets/image/slides-icon.png";
+      case "video/mp4":
+        return "../assets/image/video-icon.png";
+      default:
+        break;
+    }
+  };
+
+  const handleClickResource = (applicationType, id, name) => {
+    switch (applicationType) {
+      case "application/pdf":
+        download(id, name);
+        break;
+      case "video/mp4":
+        setModal(true);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div>
       <SectionMenu menuCurrent={`Course / ${course.name}`} />
       <Container>
         {loading && (
-          <Tabs
-            defaultActiveKey={activeTab}
-            onChange={(activeKey) => {
-              onChangeTabs(activeKey);
-            }}
-          >
-            <TabPane tab="Lessons" key="1">
-              <Container>
-                <div className="row">
-                  <div className="col-9">
+          <Row>
+            <Col span={18}>
+              <Tabs
+                defaultActiveKey={activeTab}
+                onChange={(activeKey) => {
+                  onChangeTabs(activeKey);
+                }}
+              >
+                <TabPane tab="Lessons" key="1">
+                  <Container>
                     <Collapse defaultActiveKey={["1"]}>
                       {lessons &&
                         lessons.length &&
@@ -183,61 +228,41 @@ const CourseDetail = () => {
                                                   {(l.resources &&
                                                     l.resources.length &&
                                                     l.resources.map(
-                                                      (pdf, key) => {
-                                                        return pdf.type ===
-                                                          "application/pdf" ? (
+                                                      (file, key) => (
+                                                        <Content
+                                                          className="material"
+                                                          key={key}
+                                                        >
+                                                          {
+                                                            <img
+                                                              width={30}
+                                                              height={25}
+                                                              src={renderIconMaterial(
+                                                                file.type
+                                                              )}
+                                                              alt={`slide for lesson ${
+                                                                key + 1
+                                                              }`}
+                                                            />
+                                                          }
                                                           <div
-                                                            className="row"
-                                                            key={key}
+                                                            onClick={() =>
+                                                              handleClickResource(
+                                                                file.type,
+                                                                l._id,
+                                                                file.name
+                                                              )
+                                                            }
                                                           >
-                                                            <div className="col-12 mb-2">
-                                                              <Content>
-                                                                {
-                                                                  <img
-                                                                    width={30}
-                                                                    height={25}
-                                                                    src="../assets/image/slides-icon.png"
-                                                                    alt={`slide for lesson ${
-                                                                      key + 1
-                                                                    }`}
-                                                                  />
-                                                                }
-                                                                <div
-                                                                  onClick={() =>
-                                                                    download(
-                                                                      l._id,
-                                                                      pdf.name
-                                                                    )
-                                                                  }
-                                                                >
-                                                                  {pdf.name}
-                                                                </div>
-                                                              </Content>
-                                                            </div>
+                                                            {file.name}
                                                           </div>
-                                                        ) : (
-                                                          <div
-                                                            className="row"
-                                                            key={key}
-                                                          >
-                                                            <div className="col-4 mb-2">
-                                                              <Content>
-                                                                <video
-                                                                  width="500"
-                                                                  height="400"
-                                                                  controls
-                                                                  loop
-                                                                >
-                                                                  <source
-                                                                    src={`${vars.server}/resources/${l._id}/${pdf.name}`}
-                                                                    type="video/mp4"
-                                                                  />
-                                                                </video>
-                                                              </Content>
-                                                            </div>
-                                                          </div>
-                                                        );
-                                                      }
+                                                          <PopupVideo
+                                                            modal={modal}
+                                                            setModal={setModal}
+                                                            link={`${vars.server}/resources/${l._id}/${file.name}`}
+                                                          />
+                                                        </Content>
+                                                      )
                                                     )) ||
                                                     undefined}
                                                 </TabPane>
@@ -263,14 +288,15 @@ const CourseDetail = () => {
                           );
                         })}
                     </Collapse>
-                  </div>
-                </div>
-              </Container>
-            </TabPane>
-            <TabPane tab="Group Acitivity" key="2">
-              <GroupActivity />
-            </TabPane>
-          </Tabs>
+                  </Container>
+                </TabPane>
+                <TabPane tab="Group Acitivity" key="2">
+                  <GroupActivityList />
+                </TabPane>
+              </Tabs>
+            </Col>
+            <MainInfo data={course} />
+          </Row>
         )}
       </Container>
     </div>

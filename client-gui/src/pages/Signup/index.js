@@ -23,7 +23,7 @@ export default function SignUp() {
   const auth = useAuth()
   const navigate = useNavigate()
   const { openSnackbar } = useSnackbar()
-  const [userType, setUserType] = React.useState(ACTOR_TYPE.STUDENT)
+  const [userType, setUserType] = React.useState(ACTOR_TYPE.TEACHER)
   const handleChangeUserType = (e) => {
     setUserType(e.target.value)
   }
@@ -107,17 +107,15 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">You are</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={userType}
-                    label="You are"
+                  <TextField
                     size="small"
-                    onChange={handleChangeUserType}>
-                    <MenuItem value={ACTOR_TYPE.STUDENT}>Student</MenuItem>
-                    <MenuItem value={ACTOR_TYPE.TEACHER}>Teacher</MenuItem>
-                  </Select>
+                    required
+                    fullWidth
+                    id="demo-simple-select"
+                    label="You are"
+                    name="userType"
+                    value={userType}
+                  />
                 </FormControl>
               </Grid>
               <Grid item xs={12}>

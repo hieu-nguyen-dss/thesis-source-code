@@ -23,7 +23,8 @@ const learningPathSchema = new mongoose.Schema(
     description: {
       type: String
     },
-    ownerType: { // student / teacher / organization
+    ownerType: {
+      // student / teacher / organization
       type: String,
       required: true
     },
@@ -45,14 +46,18 @@ const learningPathSchema = new mongoose.Schema(
     time: {
       type: Number
     },
-    parts: [{
-      type: ObjectId,
-      ref: 'part'
-    }],
-    rubrics: [{
-      type: ObjectId,
-      ref: 'rubric'
-    }],
+    parts: [
+      {
+        type: ObjectId,
+        ref: 'part'
+      }
+    ],
+    rubrics: [
+      {
+        type: ObjectId,
+        ref: 'rubric'
+      }
+    ],
     forkFrom: {
       type: String
     },
@@ -68,18 +73,29 @@ const learningPathSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
-    comments: [{
-      type: ObjectId,
-      ref: 'comment'
-    }],
+    comments: [
+      {
+        type: ObjectId,
+        ref: 'comment'
+      }
+    ],
+    participants: [
+      {
+        type: ObjectId,
+        ref: 'user'
+      }
+    ],
+    semaster: {
+      type: String
+    },
     startDate: {
-      type: Date,
+      type: Date
     },
     endDate: {
-      type: Date,
+      type: Date
     },
     status: {
-      type: String,
+      type: String
     }
   },
   {
@@ -88,7 +104,7 @@ const learningPathSchema = new mongoose.Schema(
 )
 learningPathSchema.post(/delete/i, async function (lp, next) {
   console.log('Delete lp')
-  const dels = lp.parts.map(pId => Part.findByIdAndDelete(pId))
+  const dels = lp.parts.map((pId) => Part.findByIdAndDelete(pId))
   await Promise.all(dels)
   next()
 })

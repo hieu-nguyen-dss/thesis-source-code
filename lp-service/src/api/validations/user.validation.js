@@ -4,57 +4,36 @@ const { customValidate } = require('../utils/validation')
 
 const signup = {
   body: Joi.object({
-    email: Joi
-      .string()
-      .email()
-      .required(),
-    password: Joi
-      .string()
-      .min(6)
-      .required(),
-    name: Joi
-      .string()
-      .required()
-      .min(2),
-    userType: Joi
-      .string()
-      .required()
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required(),
+    name: Joi.string().required().min(2),
+    userType: Joi.string().required(),
+    organization: Joi.string().empty()
   })
 }
 
 const login = {
   body: Joi.object({
-    email: Joi
-      .string()
-      .email()
-      .required(),
-    password: Joi
-      .string()
-      .min(6)
-      .required()
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required()
   })
 }
 
 const getUsers = {
   query: Joi.object({
-    userId: Joi
-      .string()
-      .required()
+    userId: Joi.string().required()
   })
 }
 
 const getListUser = {
   query: Joi.object({
-    userType: Joi
-      .string()
-      .required()
+    userType: Joi.string().required()
   })
 }
 
 const deleteUser = {
   query: Joi.object({
-    id: Joi
-      .string()
+    id: Joi.string()
   })
 }
 
@@ -70,5 +49,5 @@ module.exports = {
   getUsersValidate: customValidate(getUsers),
   getUsersListValidate: customValidate(getListUser),
   getUsersByEmailValidate: customValidate(getUsersByEmail),
-  deleteUserValidate: customValidate(deleteUser),
+  deleteUserValidate: customValidate(deleteUser)
 }

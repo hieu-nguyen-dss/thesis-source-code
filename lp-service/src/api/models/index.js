@@ -28,6 +28,7 @@ const QuestionSet = require('./question-set.model')
 const Exam = require('./exam.model')
 const ExamAnalyst = require('./exam-analyst.model')
 const QuestionSetKey = require('./question-set-key.model')
+const Participant = require('./participant.model')
 
 module.exports = {
   EditPermission,
@@ -59,5 +60,6 @@ module.exports = {
   QuestionSet,
   Exam,
   ExamAnalyst,
-  QuestionSetKey
+  QuestionSetKey,
+  Participant
 }

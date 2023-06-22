@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import { quizApi } from '../../apis'
 import { HTTP_STATUS, SNACKBAR } from '../../constants'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useSnackbar } from '../../contexts'
 
 const Quizzes = () => {
@@ -28,37 +28,65 @@ const Quizzes = () => {
   const [correctAnswer, setCorrectAnswer] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
+  const state = location.state
   const { openSnackbar } = useSnackbar()
 
   const handleSubmit = async (event) => {
     const user = JSON.parse(localStorage.getItem('user'))
     setIsSubmitted(true)
     event.preventDefault()
-    try {
-      const { status, data } = await quizApi.createQuiz(
-        id,
-        lesson,
-        question,
-        choices,
-        correctAnswer,
-        user.userId
-      )
-      if (status === HTTP_STATUS.OK) {
-        openSnackbar(SNACKBAR.SUCCESS, 'Create successfully')
-        setQuestion('')
-        setChoices([
-          { key: 'ChoiceA', value: '' },
-          { key: 'ChoiceB', value: '' },
-          { key: 'ChoiceC', value: '' },
-          { key: 'ChoiceD', value: '' }
-        ])
-        setCorrectAnswer('')
-        setIsSubmitted(false)
-      } else {
-        openSnackbar(SNACKBAR.WARNING, 'Please fill in all required field')
+    if (state) {
+      try {
+        const { status } = await quizApi.updateQuestion(state.quizId, state.questionId, {
+          question,
+          choices,
+          answer: correctAnswer
+        })
+        if (status === HTTP_STATUS.OK) {
+          openSnackbar(SNACKBAR.SUCCESS, 'Update successfully')
+          setQuestion('')
+          setChoices([
+            { key: 'ChoiceA', value: '' },
+            { key: 'ChoiceB', value: '' },
+            { key: 'ChoiceC', value: '' },
+            { key: 'ChoiceD', value: '' }
+          ])
+          setCorrectAnswer('')
+          setIsSubmitted(false)
+        } else {
+          openSnackbar(SNACKBAR.WARNING, 'Please fill in all required field')
+        }
+      } catch (error) {
+        openSnackbar(SNACKBAR.ERROR, 'Try again')
       }
-    } catch (error) {
-      openSnackbar(SNACKBAR.ERROR, 'Try again')
+    } else {
+      try {
+        const { status } = await quizApi.createQuiz(
+          id,
+          lesson,
+          question,
+          choices,
+          correctAnswer,
+          user.userId
+        )
+        if (status === HTTP_STATUS.OK) {
+          openSnackbar(SNACKBAR.SUCCESS, 'Create successfully')
+          setQuestion('')
+          setChoices([
+            { key: 'ChoiceA', value: '' },
+            { key: 'ChoiceB', value: '' },
+            { key: 'ChoiceC', value: '' },
+            { key: 'ChoiceD', value: '' }
+          ])
+          setCorrectAnswer('')
+          setIsSubmitted(false)
+        } else {
+          openSnackbar(SNACKBAR.WARNING, 'Please fill in all required field')
+        }
+      } catch (error) {
+        openSnackbar(SNACKBAR.ERROR, 'Try again')
+      }
     }
   }
 
@@ -78,6 +106,25 @@ const Quizzes = () => {
   const handleCorrectAnswerChange = (event) => {
     setCorrectAnswer(event.target.value)
   }
+
+  const getQuizDetail = async () => {
+    try {
+      const { status, data } = await quizApi.getQuestion(state.questionId)
+      if (status === HTTP_STATUS.OK) {
+        setQuestion(data.question.questions)
+        setCorrectAnswer(data.question.answer)
+        setChoices(data.question.choices)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (state) {
+      getQuizDetail()
+    }
+  }, [])
 
   return (
     <React.Fragment>

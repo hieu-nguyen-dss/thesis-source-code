@@ -73,7 +73,6 @@ const MyTeachers = (props) => {
   }
 
   const sendInviteEmail = async (userId) => {
-    console.log(findRs[userId])
     try {
       const { status, data } = await ogzApi.addMember(ogzId, {
         user: findRs[userId],
@@ -174,6 +173,7 @@ const MyTeachers = (props) => {
         <Grid item xs={12}>
           <Divider sx={{ my: 1, color: 'rgb(240 242 245)' }} />
         </Grid>
+        {console.log('members: ', members)}
         {members &&
           members.map((member, index) => (
             <Member
@@ -192,7 +192,7 @@ const MyTeachers = (props) => {
         <DialogTitle>{t('organization.members.findMember')}</DialogTitle>
         <DialogContent>
           <Typography sx={{ fontSize: 14, color: 'lightslategray' }}>
-          {t('organization.members.findMemberNote')}
+            {t('organization.members.findMemberNote')}
           </Typography>
           <TextField
             size="small"
@@ -209,63 +209,67 @@ const MyTeachers = (props) => {
               const isMember = memberIds.includes(userId)
               return (
                 <Paper
-                key={index}
-                variant="outlined"
-                sx={{ p: 1, display: 'flex', justifyContent: 'space-between', m: 1 }}>
-                <Link
-                  style={{
-                    textDecoration: 'none',
-                    display: 'flex',
-                    alignItems: 'center'
-                  }}
-                  to={`/profile/${userId}`}>
-                  <Avatar
-                    sx={{ width: 40, height: 40, mr: 1 }}
-                    alt={user.name}
-                    src={'https://mui.com/static/images/cards/contemplative-reptile.jpg'}
-                  />
-                  <Box>
-                    <Typography
-                      sx={{ color: (theme) => theme.palette.primary.main, fontWeight: 'bold' }}>
-                      {user.name}
-                    </Typography>
-                    <Typography sx={{ fontSize: 12, color: 'lightgrey' }}>{user.email}</Typography>
-                  </Box>
-                </Link>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <FormControl size="small">
-                    <InputLabel id="collaborator-type">{t('organization.members.role')}</InputLabel>
-                    <Select
+                  key={index}
+                  variant="outlined"
+                  sx={{ p: 1, display: 'flex', justifyContent: 'space-between', m: 1 }}>
+                  <Link
+                    style={{
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center'
+                    }}
+                    to={`/profile/${userId}`}>
+                    <Avatar
+                      sx={{ width: 40, height: 40, mr: 1 }}
+                      alt={user.name}
+                      src={'https://mui.com/static/images/cards/contemplative-reptile.jpg'}
+                    />
+                    <Box>
+                      <Typography
+                        sx={{ color: (theme) => theme.palette.primary.main, fontWeight: 'bold' }}>
+                        {user.name}
+                      </Typography>
+                      <Typography sx={{ fontSize: 12, color: 'lightgrey' }}>
+                        {user.email}
+                      </Typography>
+                    </Box>
+                  </Link>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <FormControl size="small">
+                      <InputLabel id="collaborator-type">
+                        {t('organization.members.role')}
+                      </InputLabel>
+                      <Select
+                        disabled={isMember}
+                        onChange={(e) => handleChangeRole(userId, e.target.value)}
+                        sx={{ fontSize: 11, borderRadius: 10, mr: 1 }}
+                        labelId="collaborator-type"
+                        label={t('organization.members.role')}
+                        value={memberRoles[userId] || COLLABORATOR_TYPE.MEMBER}>
+                        {Object.entries(COLLABORATOR_TYPE).map(([type, value], index) => (
+                          <MenuItem sx={{ fontSize: 12 }} key={index} value={type}>
+                            {t(`organization.members.${type.toLowerCase()}`)}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                    <Button
+                      onClick={() => sendInviteEmail(userId)}
                       disabled={isMember}
-                      onChange={(e) => handleChangeRole(userId, e.target.value)}
-                      sx={{ fontSize: 11, borderRadius: 10, mr: 1 }}
-                      labelId="collaborator-type"
-                      label={t('organization.members.role')}
-                      value={memberRoles[userId] || COLLABORATOR_TYPE.MEMBER}>
-                      {Object.entries(COLLABORATOR_TYPE).map(([type, value], index) => (
-                        <MenuItem sx={{ fontSize: 12 }} key={index} value={type}>
-                          {t(`organization.members.${type.toLowerCase()}`)}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                  <Button
-                    onClick={() => sendInviteEmail(userId)}
-                    disabled={isMember}
-                    size="small"
-                    sx={{
-                      color: '#6c68f3',
-                      background: 'white',
-                      border: !isMember ? '2px solid #6c68f3' : '2px solid #ddd',
-                      textTransform: 'none',
-                      '&:hover': {
-                        background: 'white'
-                      }
-                    }}>
-                    {t('organization.members.sendEmail')}
-                  </Button>
-                </Box>
-              </Paper>
+                      size="small"
+                      sx={{
+                        color: '#6c68f3',
+                        background: 'white',
+                        border: !isMember ? '2px solid #6c68f3' : '2px solid #ddd',
+                        textTransform: 'none',
+                        '&:hover': {
+                          background: 'white'
+                        }
+                      }}>
+                      {t('organization.members.sendEmail')}
+                    </Button>
+                  </Box>
+                </Paper>
               )
             })}
           </Box>

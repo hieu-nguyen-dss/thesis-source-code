@@ -11,6 +11,12 @@ router
   .post(verifyToken, controller.insertQuestions)
 
 router
+  .route('/question')
+  .get(verifyToken, controller.getQuestion)
+  .put(verifyToken, controller.updateQuestion)
+  .delete(verifyToken, controller.deleteQuestion)
+
+router
   .route('/answer/:quizzId/:studentId')
   .get(verifyToken, controller.getAnswer)
   .post(verifyToken, controller.storeResult)

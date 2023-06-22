@@ -27,8 +27,8 @@ module.exports = {
     redirectUri: 'http://localhost:8000/auth/google'
   },
   nodemailer: {
-    user: process.env.MAIL_USERNAME || 'mrkienkptn@gmail.com',
-    pass: process.env.MAIL_PASSWORD || 'koatrpdqqausqxga',
+    user: process.env.MAIL_USERNAME || 'nguyenhieu12012000@gmail.com',
+    pass: process.env.MAIL_PASSWORD || 'umirmatlezyfynyj',
     clientId:
       process.env.OAUTH_CLIENTID ||
       '694408575075-u9junos4ffksiljpu9c8r3ksvqk6accq.apps.googleusercontent.com',

@@ -34,12 +34,7 @@ const addMember = async (req, res, next) => {
   try {
     const token = genToken({ ogzId, user, role }, secretKey)
     const updatedOgz = await ogzRepo.addMember(ogzId, user, role)
-    const sendMailRes = await sendInviteMail(
-      'kien.tv.1999@gmail.com',
-      updatedOgz.ogz.name,
-      ogzId,
-      token
-    )
+    const sendMailRes = await sendInviteMail(user.email, updatedOgz.ogz.name, ogzId, token)
     return res.status(httpStatus.OK).json(getApiResponse({ data: { updatedOgz, sendMailRes } }))
   } catch (error) {
     next(error)
@@ -81,14 +76,6 @@ const getOrganization = async (req, res, next) => {
       }
     }
     return res.status(httpStatus.OK).json(getApiResponse({ data: rs }))
-  } catch (error) {
-    next(error)
-  }
-}
-
-const deleteOrganization = async (req, res, next) => {
-  // const { ogzId } = req.params
-  try {
   } catch (error) {
     next(error)
   }
@@ -152,7 +139,6 @@ module.exports = {
   addMember,
   removeMember,
   getMembers,
-  deleteOrganization,
   getOrganization,
   createLearningPath,
   deleteLearningPath,

@@ -2,7 +2,6 @@ import * as React from 'react'
 import {
   Box,
   Grid,
-  Container,
   Button,
   Dialog,
   DialogTitle,
@@ -20,9 +19,9 @@ import { TabContext, TabList, TabPanel } from '@mui/lab'
 import AddIcon from '@mui/icons-material/Add'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
 import { styled } from '@mui/material/styles'
-import { Outlet, useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-
+import { DatePicker } from 'antd'
 import LP from './LP'
 import Roadmap from './Roadmap'
 import Filter from './Filter'
@@ -46,6 +45,13 @@ const LP_TYPE = {
   SUBJECT: 'SUBJECT'
 }
 
+const semasters = {
+  20202021: '2020-2021',
+  20212022: '2021-2022',
+  20222023: '2022-2023',
+  20232024: '2023-2024'
+}
+
 const MyLPs = (props) => {
   const [LPs, setLPs] = React.useState(props.lps)
   const [roadmaps, setRoadmaps] = React.useState([])
@@ -57,21 +63,24 @@ const MyLPs = (props) => {
   const [newDescription, setNewDescription] = React.useState('')
   const [countCate, setCountCate] = React.useState({})
   const [currentTab, setCurrentTab] = React.useState('0')
+  const [rangeTime, setRangeTime] = React.useState([])
   const { t } = useTranslation('common')
   const { pathname } = useLocation()
   const { ogzId } = useParams()
   const { openSnackbar } = useSnackbar()
-  const auth = useAuth()
   const ogzMode = pathname.includes('organizations')
-  const [newLPType, setNewLPType] = React.useState(ogzMode ? LP_TYPE.COURSE : LP_TYPE.ROADMAP)
-
+  const [newLPType, setNewLPType] = React.useState(LP_TYPE.SUBJECT)
+  const [semaster, setSemaster] = React.useState('2023-2024')
+  const { RangePicker } = DatePicker
+  const auth = useAuth()
   const submitCreateOgzCourse = async () => {
     try {
       const { status, data } = await ogzApi.createLp(ogzId, {
         name: newName,
         category: newCategory,
         description: newDescription,
-        ownerType: ACTOR_TYPE.ORGANIZATION
+        ownerType: ACTOR_TYPE.ORGANIZATION,
+        participants: [auth.user.userId]
       })
       if (status === HTTP_STATUS.OK) {
         openSnackbar(SNACKBAR.SUCCESS, 'Create successfully')
@@ -93,7 +102,11 @@ const MyLPs = (props) => {
         name: newName,
         category: newCategory,
         description: newDescription,
-        ownerType: ACTOR_TYPE.TEACHER
+        ownerType: ACTOR_TYPE.TEACHER,
+        semaster,
+        startDate: rangeTime[0],
+        endDate: rangeTime[1],
+        participants: [auth.user.userId]
       })
       if (status === HTTP_STATUS.OK) {
         openSnackbar(SNACKBAR.SUCCESS, 'Create successfully')
@@ -131,6 +144,7 @@ const MyLPs = (props) => {
       openSnackbar(SNACKBAR.ERROR, 'Try again')
     }
   }
+
   const submitCreateNew = async () => {
     if (newName === '' || newDescription === '') {
       openSnackbar(SNACKBAR.WARNING, 'Please fill in all required field')
@@ -153,6 +167,7 @@ const MyLPs = (props) => {
         return isMatch(LP.name, str) && category === LP.category
       }
     })
+
     const rms = roadmaps.filter((rm) => {
       if (category === '') {
         return isMatch(rm.name, str) && isMatch(rm.category, category)
@@ -185,6 +200,10 @@ const MyLPs = (props) => {
       {}
     )
     setCountCate(rs)
+  }
+
+  const handleRangeChange = (dates, dateStrings) => {
+    setRangeTime(dateStrings)
   }
 
   React.useEffect(() => {
@@ -339,6 +358,31 @@ const MyLPs = (props) => {
                   )}
                 </Select>
               </FormControl>
+              <div
+                style={{
+                  marginTop: '20px',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  flexWrap: 'wrap',
+                  gap: '10px'
+                }}>
+                <FormControl size="small" sx={{ minWidth: 200 }}>
+                  <InputLabel id="demo-select-type">Semaster</InputLabel>
+                  <Select
+                    required
+                    labelId="semaster"
+                    id="semaster"
+                    fullWidth
+                    value={semaster}
+                    label="Semaster"
+                    onChange={(e) => setSemaster(e.target.value)}>
+                    {Object.entries(semasters).map((s) => (
+                      <MenuItem value={s[1]}>{s[1]}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <RangePicker size="large" style={{ color: 'black' }} onChange={handleRangeChange} />
+              </div>
               <TextField
                 size="small"
                 fullWidth
@@ -379,7 +423,6 @@ const MyLPs = (props) => {
           </DialogContent>
         </CustomDialog>
       </Box>
-      {/* <Outlet /> */}
     </Box>
   )
 }

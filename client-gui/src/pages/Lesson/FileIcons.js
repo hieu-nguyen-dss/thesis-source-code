@@ -3,7 +3,7 @@ import { Paper, IconButton, Box } from '@mui/material'
 import DownloadIcon from '@mui/icons-material/Download'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { saveAs } from 'file-saver'
-import { useLocation, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { uploadApi } from '../../apis'
 import vars from '../../config/vars'

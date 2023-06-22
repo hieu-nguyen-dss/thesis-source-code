@@ -67,12 +67,12 @@ const Lesson = (props) => {
       }
     } catch (error) {}
   }
-  const getListQuizz = async() => {
+  const getListQuizz = async () => {
     setLoading(true)
     try {
       const { status, data } = await quizApi.getQuiz(id, lesson)
       if (status === HTTP_STATUS.OK) {
-        setData(data?.quizzes[0]?.questions)
+        setData(data?.quizzes[0])
         setLoading(false)
       }
     } catch (error) {
@@ -115,13 +115,15 @@ const Lesson = (props) => {
                 }}>
                 <AttachmentIcon />
                 <Typography sx={{ fontWeight: 'bold', textTransform: 'uppercase', ml: 1 }}>
-                  <Link style={{ textDecoration: 'none', color: 'black' }} to={`${pathname}/quizzes`}>
+                  <Link
+                    style={{ textDecoration: 'none', color: 'black' }}
+                    to={`${pathname}/quizzes`}>
                     Quizz
                   </Link>
                 </Typography>
               </Box>
               <Box sx={{ p: 3, width: '100%' }}>
-                { !loading && <TableQuizzes data={data}/>}
+                {!loading && <TableQuizzes data={data} setLoading={setLoading} />}
               </Box>
             </Grid>
             <Grid item xs={4} sm={8} md={12}>

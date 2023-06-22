@@ -71,6 +71,7 @@
   },
   "search": "Tìm kiếm",
   "learningPath": {
+    "studentManagement": "Danh sách học sinh",
     "learningPath": "Lộ trình học tập",
     "tabCourse": "Khóa học",
     "tabRoadmap": "Roadmap",
@@ -111,7 +112,8 @@
       "roadmap": "Roadmap",
       "course": "Khóa học",
       "forOgz": "Khóa học"
-    }
+    },
+    "addStudent": "Add student"
   },
   "lesson": {
     "outcomes": "Mục tiêu",

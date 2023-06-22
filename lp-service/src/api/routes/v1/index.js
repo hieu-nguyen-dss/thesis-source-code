@@ -17,6 +17,7 @@ const adminRoutes = require('./admin.route')
 const quizRoute = require('./quiz.route')
 const chatRoomRoute = require('./chatRoom.route')
 const examRoute = require('./exam.route')
+const studentRoute = require('./student.route')
 const router = express.Router()
 
 router.use(examRoute)
@@ -36,4 +37,5 @@ router.use('/notifs', notifRoutes)
 router.use('/admin', adminRoutes)
 router.use('/quiz', quizRoute)
 router.use('/chatroom', chatRoomRoute)
+router.use(studentRoute)
 module.exports = router

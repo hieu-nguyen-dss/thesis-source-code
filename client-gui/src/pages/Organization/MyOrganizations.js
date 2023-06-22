@@ -29,7 +29,8 @@ const MyOrganizations = ({ organizations }) => {
               <CardMedia
                 component="img"
                 height="140"
-                image={`${vars.server}/resources/organizations/${ogz._id}/${ogz.backgroundImg}`}
+                // image={`${vars.server}/resources/organizations/${ogz._id}/${ogz.backgroundImg}`}
+                image="https://www.aihr.com/wp-content/uploads/organizational-design-cover.png"
                 alt="green iguana"
               />
               <CardContent>

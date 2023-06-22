@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { doc, updateDoc, onSnapshot, getDoc } from "firebase/firestore";
+import { doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../../firebase/config";
 import {
@@ -11,26 +10,20 @@ import {
   Row,
   Col,
   Typography,
-  Popover,
   Button,
 } from "antd";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import AgoraRTC from "agora-rtc-sdk-ng";
-import { FiMicOff, FiRadio, FiLogOut, FiMusic } from "react-icons/fi";
-import { BsFillMicFill, BsMusicNoteBeamed } from "react-icons/bs";
+import { FiMicOff, FiLogOut } from "react-icons/fi";
+import { BsFillMicFill } from "react-icons/bs";
 let client = AgoraRTC.createClient({
   mode: "rtc",
   codec: "vp8",
 });
 
-let handleError = function (err) {
-  console.log("Error: ", err);
-};
-
 const AudioCall = ({ setIsModalOpen, selectedRoomId }) => {
   const id = selectedRoomId;
-  const navigate = useNavigate();
   const [load, setLoad] = useState(false);
   const [active, setActive] = useState([]);
   const [conn_state, setConn_state] = useState("");
@@ -38,7 +31,6 @@ const AudioCall = ({ setIsModalOpen, selectedRoomId }) => {
   const [mute, setMute] = useState(false);
   const [stream, setstream] = useState();
   const [state, setState] = useState(false);
-  const [volume, setVolume] = useState(50);
   const [profiles, setProfiles] = useState([
     "speech_low_quality",
     "speech_standard",
@@ -47,33 +39,11 @@ const AudioCall = ({ setIsModalOpen, selectedRoomId }) => {
     "high_quality",
     "high_quality_stereo",
   ]);
-  const [audio_input, setAudio_input] = useState([]);
-  const [audio_output, setaudio_output] = useState([]);
   const [hostId, setHostId] = useState("");
 
   const {
     user: { uid, photoURL, displayName },
   } = useContext(AuthContext);
-
-  // async function addVideoStream(elementId) {
-  //   let remoteContainer = document.getElementById("remote");
-
-  //   // Creates a new div for every stream
-  //   let streamDiv = document.createElement("div");
-  //   // Assigns the elementId to the div.
-  //   streamDiv.id = elementId;
-  //   // Takes care of the lateral inversion
-  //   streamDiv.style.transform = "rotateY(180deg)";
-  //   // Adds the div to the container.
-  //   remoteContainer.appendChild(streamDiv);
-  // }
-
-  // async function removeVideoStream(elementId) {
-  //   let remoteDiv = document.getElementById(elementId);
-  //   if (remoteDiv) {
-  //     remoteDiv.parentNode.removeChild(remoteDiv);
-  //   }
-  // }
 
   const join = async () => {
     setLoad(true);

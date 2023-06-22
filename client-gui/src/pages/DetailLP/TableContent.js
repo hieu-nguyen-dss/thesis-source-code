@@ -31,9 +31,8 @@ import { partApi, lessonApi } from '../../apis'
 import { HTTP_STATUS, SNACKBAR } from '../../constants'
 
 const TableContent = (props) => {
-  const { allParts, editable } = props
+  const { allParts, editable, lessons, setLessons } = props
   const [parts, setParts] = React.useState(null)
-  const [lessons, setLessons] = React.useState(null)
   const [partIds, setPartIds] = React.useState(null)
   const [opens, setOpens] = React.useState(null)
   const [newPart, setNewPart] = React.useState(false)
@@ -81,7 +80,6 @@ const TableContent = (props) => {
     copyOpen[index] = !copyOpen[index]
     setOpens(copyOpen)
   }
-
   const handleOpenLesson = (lessonId) => {
     navigate(`${pathname}/${lessonId}`)
   }
@@ -178,9 +176,7 @@ const TableContent = (props) => {
 
   return (
     <React.Fragment>
-      <Typography textAlign={'center'}>
-        {t('learningPath.tableOfContent')}
-      </Typography>
+      <Typography textAlign={'center'}>{t('learningPath.tableOfContent')}</Typography>
       <List>
         {parts &&
           lessons &&

@@ -12,7 +12,7 @@ const WrapperStyled = styled.div`
   justify-content: space-between;
   padding: 12px 16px;
   border-bottom: 1px solid rgba(82, 38, 83);
-
+  height: 100%;
   .username {
     color: black;
     margin-left: 5px;
@@ -36,7 +36,6 @@ export default function UserInfo() {
       <Button
         variant="outlined"
         onClick={() => {
-          // clear state in App Provider when logout
           clearState();
           auth.signOut();
         }}

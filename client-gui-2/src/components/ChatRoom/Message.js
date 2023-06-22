@@ -68,6 +68,8 @@ export default function Message({
               srcSet={`${fileUrl}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
               alt={fileName}
               loading="lazy"
+              width={150}
+              height={100}
             />
           </a>
         )}

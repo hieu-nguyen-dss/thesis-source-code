@@ -1,6 +1,7 @@
 {
   "auth": {
     "login": {
+      "email": "Email address",
       "password": "Password"
     },
     "logout": "Logout"
@@ -71,6 +72,8 @@
   },
   "search": "Search",
   "learningPath": {
+    "studentManagement": "Student Lits",
+    "addStudent": "Add student",
     "learningPath": "Learning Paths",
     "tabCourse": "Courses",
     "tabRoadmap": "Roadmaps",

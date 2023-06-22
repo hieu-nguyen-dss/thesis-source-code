@@ -41,6 +41,8 @@ export default function SignIn() {
           navigate(from, { replace: true })
         }
       )
+    } else if (status === HTTP_STATUS.UNAUTHORIZED) {
+      openSnackbar(SNACKBAR.ERROR, 'Not permission')
     } else if (status === HTTP_STATUS.BAD_REQUEST || status === HTTP_STATUS.NOT_FOUND) {
       openSnackbar(SNACKBAR.ERROR, 'Email or password is incorrect')
     }
@@ -84,7 +86,7 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label={t('auth.login.email')}
               name="email"
               autoComplete="email"
               autoFocus
@@ -95,7 +97,7 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label={t('login.password')}
+              label={t('auth.login.password')}
               type="password"
               id="password"
               autoComplete="current-password"
@@ -117,7 +119,9 @@ export default function SignIn() {
             <Grid container>
               <Grid item xs></Grid>
               <Grid item>
-                <Link style={{ fontSize: 14 }} to="/signup">{"Don't have an account? Sign Up"}</Link>
+                <Link style={{ fontSize: 14 }} to="/signup">
+                  {"Don't have an account? Sign Up"}
+                </Link>
               </Grid>
             </Grid>
           </Box>

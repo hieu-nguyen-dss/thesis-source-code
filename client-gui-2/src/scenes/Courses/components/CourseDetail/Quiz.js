@@ -58,7 +58,7 @@ const Quiz = ({ kye, onFinish, quizzes, onChangeForm, values, setValues }) => {
             return (
               <div className="row" key={key}>
                 <div className="col-12">
-                  <p>
+                  <p style={{ fontWeight: "600" }}>
                     Question {key + 1}: {question.questions}
                   </p>
                   <Form.Item>
@@ -73,7 +73,9 @@ const Quiz = ({ kye, onFinish, quizzes, onChangeForm, values, setValues }) => {
                           question.choices.length &&
                           question.choices.map((ch, key) => (
                             <Radio key={key} value={ch.key}>
-                              <span>{ch.value}</span>
+                              <span style={{ fontWeight: "500" }}>
+                                {ch.value}
+                              </span>
                               {value?.answer === ch.key &&
                               value?.answer === value?.correctAnswer ? (
                                 <CheckIcon
