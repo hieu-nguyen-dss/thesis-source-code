@@ -3,6 +3,7 @@ import { Collapse } from "antd";
 import styled from "styled-components";
 import { AppContext } from "../../contexts/AppProvider";
 import { BiNote } from "react-icons/bi";
+import { useParams, useLocation } from "react-router-dom";
 
 const { Panel } = Collapse;
 
@@ -90,10 +91,12 @@ const PanelStyled = styled(Panel)`
   }
 `;
 
-export default function OperationList({ name, id }) {
+export default function OperationList({ isModalOpen, setIsModalOpen }) {
+  const location = useLocation();
+  const { name, courseName } = location.state;
+  console.log("name: ", location.state);
+  const { id } = useParams();
   const { selectedRoomId } = React.useContext(AppContext);
-
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
   const showModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -128,7 +131,7 @@ export default function OperationList({ name, id }) {
               }}
               onClick={() =>
                 window.open(
-                  `/courses/${id}/note-sharing?name=${name}&room=${selectedRoomId}`,
+                  `/courses/${id}/note-sharing?courseName=${courseName}&name=${name}&room=${selectedRoomId}`,
                   "_blank"
                 )
               }

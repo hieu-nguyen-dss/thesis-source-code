@@ -291,7 +291,7 @@ const CourseDetail = () => {
                   </Container>
                 </TabPane>
                 <TabPane tab="Group Acitivity" key="2">
-                  <GroupActivityList />
+                  <GroupActivityList nameCourse={course.name} />
                 </TabPane>
               </Tabs>
             </Col>

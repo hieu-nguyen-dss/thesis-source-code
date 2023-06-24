@@ -1,35 +1,29 @@
 import { useEffect } from "react";
 import { doc, updateDoc, onSnapshot } from "firebase/firestore";
 import { useState } from "react";
-import { db } from "../../firebase/config";
-import {
-  Spin,
-  Avatar,
-  Modal,
-  Select,
-  Row,
-  Col,
-  Typography,
-  Button,
-} from "antd";
+import { db } from "../../../firebase/config";
+import { Avatar, Modal, Select, Row, Col, Typography, Button } from "antd";
 import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthProvider";
+import { AuthContext } from "../../../contexts/AuthProvider";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { FiMicOff, FiLogOut } from "react-icons/fi";
 import { BsFillMicFill } from "react-icons/bs";
-let client = AgoraRTC.createClient({
-  mode: "rtc",
-  codec: "vp8",
-});
 
-const AudioCall = ({ setIsModalOpen, selectedRoomId }) => {
+const AudioCall = ({
+  setIsModalOpen,
+  selectedRoomId,
+  stream,
+  setstream,
+  stream_id,
+  setStreamId,
+  active,
+  setActive,
+  client,
+}) => {
   const id = selectedRoomId;
   const [load, setLoad] = useState(false);
-  const [active, setActive] = useState([]);
   const [conn_state, setConn_state] = useState("");
-  const [stream_id, setStreamId] = useState(0);
   const [mute, setMute] = useState(false);
-  const [stream, setstream] = useState();
   const [state, setState] = useState(false);
   const [profiles, setProfiles] = useState([
     "speech_low_quality",
@@ -39,7 +33,6 @@ const AudioCall = ({ setIsModalOpen, selectedRoomId }) => {
     "high_quality",
     "high_quality_stereo",
   ]);
-  const [hostId, setHostId] = useState("");
 
   const {
     user: { uid, photoURL, displayName },
@@ -74,99 +67,8 @@ const AudioCall = ({ setIsModalOpen, selectedRoomId }) => {
   };
 
   useEffect(() => {
-    window.onbeforeunload = (event) => {
-      const e = event || window.event;
-      console.log("hey");
-      e.preventDefault();
-      if (e) {
-        e.returnValue = "";
-        console.log("ehy");
-      }
-      return "";
-    };
-    setstream(null);
-    onSnapshot(doc(db, "rooms", id), (room) => {
-      setActive(room?.data()?.membersCall);
-      setHostId(room?.data()?.owner.uid);
-    });
-    // AgoraRTC.getDevices((devices) => {
-    //   setAudio_input([]);
-    //   setaudio_output([]);
-    //   devices.forEach((device) => {
-    //     if (device.kind === "audioinput") {
-    //       setAudio_input((p) => [...p, device]);
-    //     } else if (device.kind === "audiooutput") {
-    //       setaudio_output((p) => [...p, device]);
-    //     }
-    //   });
-    // });
-    // client.on("stream-added", function (evt) {
-    //   client.subscribe(evt.stream, handleError);
-    // });
-    // client.on("stream-subscribed", function (evt) {
-    //   let stream = evt.stream;
-    //   let streamId = String(stream?.getId());
-    //   addVideoStream(streamId);
-    //   stream.play(streamId);
-    // });
-    // client.on("connection-state-change", (evt) => {
-    //   setConn_state(evt.curState);
-    // });
-    // client.on("stream-removed", async function (evt) {
-    //   let stream = evt.stream;
-    //   let streamId = String(stream?.getId());
-    //   stream.close();
-    //   const data = await getDoc(doc(db, "rooms", localStorage.getItem("ID")));
-    //   updateDoc(doc(db, "rooms", localStorage.getItem("ID")), {
-    //     membersCall: data
-    //       .data()
-    //       ?.members.filter(
-    //         (member) =>
-    //           member.uid !== parseInt(localStorage.getItem("streamId"))
-    //       ),
-    //   })
-    //     .then(() => localStorage.removeItem("streamId"))
-    //     .catch((e) => console.log(e));
-    //   removeVideoStream(streamId);
-    // });
-    // client.on("peer-leave", async function (evt) {
-    //   let stream = evt.stream;
-    //   let streamId = String(stream.getId());
-    //   stream.close();
-    //   const data = await getDoc(doc(db, "rooms", localStorage.getItem("ID")));
-    //   updateDoc(doc(db, "rooms", localStorage.getItem("ID")), {
-    //     membersCall: data
-    //       .data()
-    //       ?.members.filter(
-    //         (member) =>
-    //           member.uid !== parseInt(localStorage.getItem("streamId"))
-    //       ),
-    //   })
-    //     .then(() => localStorage.removeItem("streamId"))
-    //     .catch((e) => console.log(e));
-    //   removeVideoStream(streamId);
-    // });
-    return () =>
-      client
-        .leave()
-        .then(() => {
-          stream.stop();
-          updateDoc(doc(db, "rooms", id), {
-            membersCall: active.filter((member) => member.uid !== stream_id),
-          })
-            .then(() => {
-              setIsModalOpen(false);
-            })
-            .catch((error) => {
-              console.log("Error updating data in Firestore:", error);
-            });
-        })
-        .catch((error) => {
-          console.log("Leaving the channel failed:", error);
-        });
+    join();
   }, []);
-
-  if (load) return <Spin size="large">Joining</Spin>;
 
   return (
     <div>
@@ -179,6 +81,7 @@ const AudioCall = ({ setIsModalOpen, selectedRoomId }) => {
           placeholder="Choose profile"
           onChange={(e) => stream.setAudioProfile(e)}
         >
+          {console.log("TADA profiles", profiles)}
           {profiles.map((profile, i) => (
             <Select.Option key={i} value={profile}>
               {profile.split("_").join(" ")}
@@ -186,7 +89,8 @@ const AudioCall = ({ setIsModalOpen, selectedRoomId }) => {
           ))}
         </Select>
       </Modal>
-      {conn_state === "CONNECTED" ? (
+      {console.log("TADA conn_state", conn_state)}
+      {conn_state === "CONNECTED" && (
         <div>
           <Typography
             style={{
@@ -228,19 +132,8 @@ const AudioCall = ({ setIsModalOpen, selectedRoomId }) => {
             ))}
           </Row>
         </div>
-      ) : (
-        <div
-          style={{
-            marginTop: "30px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Button onClick={() => join()} type="primary">
-            Join
-          </Button>
-        </div>
       )}
+      {console.log("TADA stream", stream)}
       {stream && (
         <div>
           <div

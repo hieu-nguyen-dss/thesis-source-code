@@ -14,7 +14,6 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
-import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import { useParams } from "react-router-dom";
 
 const HeaderStyled = styled.div`

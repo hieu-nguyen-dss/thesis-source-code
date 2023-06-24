@@ -28,7 +28,7 @@ import { useSnackbar } from "../../../../contexts";
 import { SNACKBAR } from "../../../../constants";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 
-const GroupActivityList = (props) => {
+const GroupActivityList = ({ nameCourse }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -113,7 +113,12 @@ const GroupActivityList = (props) => {
                           <IconButton
                             onClick={() => {
                               setSelectedRoomId(rm.id);
-                              navigate(`${location.pathname}/room/${rm.id}`);
+                              navigate(`${location.pathname}/room/${rm.id}`, {
+                                state: {
+                                  courseName: nameCourse,
+                                  name: rm.name,
+                                },
+                              });
                             }}
                           >
                             <LoginIcon />

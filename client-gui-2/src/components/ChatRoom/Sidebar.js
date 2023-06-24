@@ -10,7 +10,7 @@ const SidebarStyled = styled.div`
   height: 85vh;
 `;
 
-export default function Sidebar({ name, id }) {
+export default function Sidebar({ isModalOpen, setIsModalOpen }) {
   return (
     <SidebarStyled>
       <Row>
@@ -18,7 +18,10 @@ export default function Sidebar({ name, id }) {
           <UserInfo />
         </Col>
         <Col span={24}>
-          <OperationList name={name} id={id} />
+          <OperationList
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
         </Col>
       </Row>
     </SidebarStyled>

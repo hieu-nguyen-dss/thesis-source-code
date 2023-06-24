@@ -3,6 +3,8 @@ import { Row, Col } from "antd";
 import Sidebar from "./Sidebar";
 import ChatWindow from "./ChatWindow";
 import styled from "styled-components";
+import AudioCallPopup from "./AudioCall/AudioCallPopup";
+import { useParams } from "react-router-dom";
 
 const RowCustom = styled(Row)`
   width: 96%;
@@ -14,17 +16,23 @@ const RowCustom = styled(Row)`
   overflow: hidden;
   box-sizing: border-box;
 `;
-const ChatRoom = ({ name, id }) => {
+
+const ChatRoom = () => {
+  const { roomId } = useParams();
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
   return (
     <>
       <RowCustom>
         <Col span={6}>
-          <Sidebar name={name} id={id} />
+          <Sidebar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
         </Col>
         <Col span={18}>
           <ChatWindow />
         </Col>
       </RowCustom>
+      {isModalOpen && (
+        <AudioCallPopup selectedRoomId={roomId} setModal={setIsModalOpen} />
+      )}
     </>
   );
 };

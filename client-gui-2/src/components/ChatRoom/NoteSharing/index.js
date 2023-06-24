@@ -76,13 +76,13 @@ const Card = styled.div`
   }
 `;
 const Board = styled.div`
-  width: 2000px;
-  height: 2000px;
+  width: 100%;
+  height: 100vh;
   border: 1px solid #333;
   position: relative;
 `;
 let db1 = null;
-let db2 = null;
+// let db2 = null;
 const CORLORS = ["#ffe1b4", "#FFF9D5", "#ECFAF5", "#CBF5E4", "#A5DEC8", "#FFF"];
 
 const NotSharing = () => {
@@ -93,6 +93,7 @@ const NotSharing = () => {
   const [items, setItems] = useState(null);
   const [dragging, setDragging] = useState({ key: "", x: 0, y: 0 });
   const [nameCourse, setNameCourse] = useState("");
+  const [nameRoom, setNameRoom] = useState("");
   const [input, setInput] = useState("");
   const [editMode, setEditMode] = useState({ key: "", w: 0, h: 0 });
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -102,12 +103,14 @@ const NotSharing = () => {
     let searchParams = new URLSearchParams(document.location.search);
     const roomId = searchParams.get("room");
     const nameCourse = searchParams.get("name");
+    const nameRoom = searchParams.get("courseName");
     setNameCourse(nameCourse);
+    setNameRoom(nameRoom);
     let dbParent = ref(firebaseDb, roomId);
     db1 = child(dbParent, "notes");
-    db2 = child(dbParent, "users");
+    // db2 = child(dbParent, "users");
     onValue(db1, (snapshot) => setItems(snapshot.val()));
-    onValue(db2, (snapshot) => setUsersCursors(snapshot.val()));
+    // onValue(db2, (snapshot) => setUsersCursors(snapshot.val()));
   }, []);
 
   const add = () => {
@@ -124,28 +127,28 @@ const NotSharing = () => {
     });
   };
 
-  const addUser = () => {
-    const newPostRef = push(db2);
-    const newPostKey = newPostRef.key;
-    update(db2, {
-      [newPostKey]: {
-        x: window.scrollX,
-        y: window.scrollY,
-        author: displayName,
-        uid,
-      },
-    });
-  };
+  // const addUser = () => {
+  //   const newPostRef = push(db2);
+  //   const newPostKey = newPostRef.key;
+  //   update(db2, {
+  //     [newPostKey]: {
+  //       x: window.scrollX,
+  //       y: window.scrollY,
+  //       author: displayName,
+  //       uid,
+  //     },
+  //   });
+  // };
 
   const updateItem = (key, item) => {
     const childRef = child(db1, key);
     update(childRef, item);
   };
 
-  const updateUser = (userId, item) => {
-    const childRef = child(db2, userId);
-    update(childRef, item);
-  };
+  // const updateUser = (userId, item) => {
+  //   const childRef = child(db2, userId);
+  //   update(childRef, item);
+  // };
 
   const removeItem = (key) => {
     const childRef = child(db1, key);
@@ -157,7 +160,7 @@ const NotSharing = () => {
   window.addEventListener("mousemove", handleMouseMove);
   return (
     <>
-      <SectionMenu menuCurrent={`Course / ${nameCourse}`} />
+      <SectionMenu menuCurrent={`Course/${nameRoom}/${nameCourse}`} />
       <Board
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => {
@@ -186,6 +189,17 @@ const NotSharing = () => {
                   background: CORLORS[items[key].c],
                 }}
                 draggable
+                onDrag={(event) => {
+                  const { clientX, clientY } = event;
+                  // Kiểm tra xem ticket có nằm ngoài kích thước màn hình không
+                  if (
+                    clientX > window.innerWidth ||
+                    clientY > window.innerHeight
+                  ) {
+                    // Mở rộng kích thước màn hình
+                    window.resizeTo(clientX + 100, clientY + 100);
+                  }
+                }}
                 onDragStart={(e) => {
                   setDragging({
                     key,
@@ -253,7 +267,7 @@ const NotSharing = () => {
                 </p>
               </Card>
             ))}
-          <div
+          {/* <div
             style={{
               position: "fixed",
               left: cursorPosition.x,
@@ -265,7 +279,7 @@ const NotSharing = () => {
             <span role="img" aria-label="cursor">
               {displayName}
             </span>
-          </div>
+          </div> */}
         </div>
       </Board>
     </>
